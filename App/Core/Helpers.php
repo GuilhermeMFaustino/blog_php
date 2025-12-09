@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use App\Source\Config;
+use Source\Config;
 
 class Helpers
 {
@@ -11,7 +11,7 @@ class Helpers
      * @param mixed $valor
      * @return string
      */
-    function valorFormat(?float $valor = null)
+    public static function valorFormat(?float $valor = null)
     {
         return number_format($valor ? $valor : 0, "2", ".", ",");
     }
@@ -21,7 +21,7 @@ class Helpers
      * Summary of localhost
      * @return bool
      */
-    function localhost(): bool
+    public static function localhost(): bool
     {
         $server = filter_input(INPUT_SERVER, 'SERVER_NAME');
 
@@ -38,7 +38,7 @@ class Helpers
      * @param string $data
      * @return string
      */
-    function tempo(string $data)
+    public static function tempo(string $data)
     {
         // data atual
         $dateDia = time();
@@ -55,9 +55,6 @@ class Helpers
         $semana  = $dif / 604800;
         $mes      = $dif / 2419200;
         $ano      = $dif / 29030400;
-
-
-        echo $hora . "</br>";
 
         if ($segundos < 60) {
             return "agora";
@@ -81,7 +78,7 @@ class Helpers
      * @param string $url
      * @return string
      */
-    function url(string $url): string
+    public static function url(string $url): string
     {
         $srevidor = filter_input(INPUT_SERVER, 'SERVER_NAME');
         $ambiente = ($srevidor == 'localhostc' ? URL_DESENVOLVIMENTO : URL_PRODUCAO);
@@ -95,7 +92,7 @@ class Helpers
      * @param string $url
      * @return string
      */
-    function slug(string $url): string
+    public static function slug(string $url): string
     {
 
         filter_var(mb_strtolower($url), FILTER_SANITIZE_SPECIAL_CHARS);
@@ -125,7 +122,7 @@ class Helpers
      * @param mixed $cpf
      * @return bool
      */
-    function validaCPF($cpf)
+    public static function validaCPF($cpf)
     {
 
         $cpf = preg_replace('/[^0-9]/', "", $cpf);
@@ -158,7 +155,7 @@ class Helpers
      * @param mixed $email
      * @return bool
      */
-    function validaEmail($email)
+    public static function validaEmail($email)
     {
         $emailValido =  filter_var($email, FILTER_VALIDATE_EMAIL);
 
@@ -175,7 +172,7 @@ class Helpers
      * @param string $url
      * @return bool
      */
-    function validaUrl(string $url): bool
+    public static function validaUrl(string $url): bool
     {
         //$url = filter_var($url, FILTER_VALIDATE_URL);
 
@@ -188,5 +185,102 @@ class Helpers
         }
 
         return false;
+    }
+
+
+    /**
+     * Summary of saudacoes
+     * @return string
+     */
+    public static function saudacoes(): string
+    {
+
+        $hora = date("H");
+
+        switch ($hora) {
+
+            case ($hora > 0 and $hora <= 5):
+                $saudacoes = "Boa Madrugada.";
+                break;
+
+            case ($hora >= 6 and $hora <= 12):
+                $saudacoes = "Bom dia";
+                break;
+
+            case ($hora >= 12 and $hora < 19):
+                $saudacoes = "Boa Tarde";
+                break;
+
+            case ($hora > 18 and $hora < 0):
+                $saudacoes = "Boa Noite";
+                break;
+        }
+        return $saudacoes;
+    }
+
+
+
+    /**
+     * Summary of dataAtual
+     * @return string
+     */
+    public static function dataAtual(): string
+    {
+        $dia = date("w");
+        $diadaSemana = date("d");
+        $mes = date("m");
+        $ano = date("Y");
+
+        $diasSemana = [
+
+            "0" => "domingo",
+            "1" => "segunda",
+            "2" => "terca",
+            "3" => "quarta",
+            "4" => "quinta",
+            "5" => "sexta",
+            "6" => "sabado"
+        ];
+
+        $meses = [
+
+            "0" => "janeiro",
+            "1" => "fevereiro",
+            "2" => "marco",
+            "3" => "abril",
+            "4" => "maio",
+            "5" => "junho",
+            "6" => "julho",
+            "7" => "agosto",
+            "8" => "setembro",
+            "9" => "outubro",
+            "10" => "novembro",
+            "11" => "dezembro"
+        ];
+
+
+        $mesAno = [
+            "1" => "janeiro",
+            "2" => "fevereiro",
+            "3" => "marco",
+            "4" => "abril",
+            "5" => "maio",
+            "6" => "junho",
+            "7" => "julho",
+            "8" => "agosto",
+            "9" => "setembro",
+            "10" => "outubro",
+            "11" => "novembro",
+            "12" => "Dezembro"
+        ];
+
+        foreach ($diasSemana as $d => $b) {
+            foreach ($mesAno as $meses => $m) {
+                if ($d == $dia && $meses == $mes) {
+                    $dataformatada =  ($diasSemana[$d] == "sabado" ? "Sabado" : $diasSemana[$d] . "-feira") . ", " . $diadaSemana . " de " . $m . " de " . $ano;
+                }
+            }
+        }
+        return $dataformatada;
     }
 }

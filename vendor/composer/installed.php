@@ -3,7 +3,7 @@
         'name' => 'guilhermemendes/blog',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '11759203e1ebb6cb5cfec667163220899805704f',
+        'reference' => '9d802fb3065c5726d384bdf1ef659d5918b79fd4',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'guilhermemendes/blog' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '11759203e1ebb6cb5cfec667163220899805704f',
+            'reference' => '9d802fb3065c5726d384bdf1ef659d5918b79fd4',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

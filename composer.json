@@ -4,15 +4,24 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "App\\": "App/"
-        }
+            "App\\": "App/",
+            "Core\\": "Helpers",
+            "Soruce\\": "Source"
+        },
+        "files": [
+            "App//Source/Config.php"
+        ]
     },
     "authors": [
         {
             "name": "Guilherme Mendes",
-            "email": "guilhermemendes.info@gmail.com"
+            "email": "guilhermemendes.info@gmail.com",
+            "homepage": "https://www.guilhermemendes.com",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": ">=8.0"
+    }
 }
