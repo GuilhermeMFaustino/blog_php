@@ -1,0 +1,17 @@
+#adicionar o inxex
+
+Options All -Indexes
+
+RewriteEngine On 
+RewriteBase /blog 
+
+# ROUTER HTTPS Redirect
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{SRCPT_FILENAME} !-f
+RewriteCond %{SRCPT_FILENAME} !-d
+RewriteCond %{SRCPT_FILENAME} !-l
+
+RewriteRule ^(.*)$ index.php?route=/$1
