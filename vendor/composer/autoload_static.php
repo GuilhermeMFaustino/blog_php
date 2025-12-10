@@ -15,6 +15,10 @@ class ComposerStaticInite0f0bd066ea4c2940a61862e7c60096d
         array (
             'Soruce\\' => 7,
         ),
+        'P' => 
+        array (
+            'Pecee\\' => 6,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -29,6 +33,10 @@ class ComposerStaticInite0f0bd066ea4c2940a61862e7c60096d
         'Soruce\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Source',
+        ),
+        'Pecee\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee',
         ),
         'Core\\' => 
         array (

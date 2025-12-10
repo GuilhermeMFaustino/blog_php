@@ -1,9 +1,14 @@
 <?php
 
-use App\Core\Helpers;
+
+use Pecee\SimpleRouter\SimpleRouter;
 
 require 'vendor/autoload.php';
 
+/** */
+SimpleRouter::setDefaultNamespace('App\Controller');
 
-echo SITE_NAME;
-echo Helpers::saudacoes();
+SimpleRouter::get("blog/", 'WebController@index');
+SimpleRouter::get("blog/sobre", 'SobreController@sobre');
+
+SimpleRouter::start();
