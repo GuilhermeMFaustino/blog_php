@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace App\Support;
 
 use Source\Config;
 
@@ -78,7 +78,7 @@ class Helpers
      * @param string $url
      * @return string
      */
-    public static function url(string $url): string
+    public static function url(?string $url = null): string
     {
         $srevidor = filter_input(INPUT_SERVER, 'SERVER_NAME');
         $ambiente = ($srevidor == 'localhostc' ? URL_DESENVOLVIMENTO : URL_PRODUCAO);

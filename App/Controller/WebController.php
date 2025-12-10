@@ -2,9 +2,19 @@
 
 namespace App\Controller;
 
-class WebController
+use App\Core\Controller;
+
+class WebController extends Controller
 {
+    public function __construct()
+    {
+        return parent::__construct('App/Themes/Blog/Web/Views/');
+    }
     public function index(){
-        echo 'index';
+        $dados = [
+            "titulo" => 'Pagina Index',
+            "produtos" => 'produtos'
+        ];
+        echo $this->views->render('index.html', $dados);
     }
 }

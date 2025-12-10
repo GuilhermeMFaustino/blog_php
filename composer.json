@@ -6,7 +6,8 @@
         "psr-4": {
             "App\\": "App/",
             "Core\\": "Helpers",
-            "Soruce\\": "Source"
+            "Source\\": "Source",
+            "Support\\": "Support"
         },
         "files": [
             "App//Source/Config.php"
@@ -23,6 +24,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=8.0",
-        "pecee/simple-router": "dev-master"
+        "pecee/simple-router": "dev-master",
+        "twig/twig": "3.22"
     }
 }
