@@ -2,12 +2,17 @@
 
 {% block content %}
 <div class="container text-center error-container">
+
   <h1 class="error-code text-danger">404</h1>
-  <h2 class="fw-bold">Página não encontrada</h2>
-  <p class="error-message text-muted">A página que você procura pode ter sido removida, renomeada ou estar
-    temporariamente indisponível.</p>
 
+  {# HTML RENDERIZADO CORRETAMENTE #}
+  <div class="mb-3">
+      {{ json_data|raw }}
+  </div>  
 
-  <a href="{{ constant('URL_DESENVOLVIMENTO') }}" class="btn btn-primary mt-3">Voltar para a página inicial</a>
+  <a href="{{ constant('URL_DESENVOLVIMENTO') }}" class="btn btn-primary mt-3">
+    Voltar para a página inicial
+  </a>
+
 </div>
 {% endblock %}

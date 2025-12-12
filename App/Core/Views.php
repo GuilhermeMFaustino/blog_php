@@ -6,11 +6,12 @@ namespace App\Core;
 use Twig\Lexer;
 use Twig\TwigFunction;
 use App\Support\Helpers;
-
+use App\Support\Menssage;
 
 class Views
 {
     private $twig;
+    private $message;
 
     /**
      * Summary of __construct

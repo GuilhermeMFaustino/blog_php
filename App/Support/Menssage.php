@@ -9,7 +9,10 @@ class Menssage
     private $type;
 
     private $icon;
-
+    public function __toString()
+    {
+        return $this->render();
+    }
     
     private function filtrar(string $mensagem)
     {

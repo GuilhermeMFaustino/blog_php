@@ -3,7 +3,7 @@
 use App\Support\Helpers;
 use Pecee\SimpleRouter\SimpleRouter;
 use App\Support\Menssage;
-
+use App\Core\Connect;
 
 try {
 
@@ -32,3 +32,7 @@ try {
 } catch (Exception $e) {
     Helpers::redirect('404');
 }
+
+
+$conn = Connect::getInstance();
+var_dump($conn);
