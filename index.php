@@ -3,7 +3,7 @@
 use App\Support\Helpers;
 use Pecee\SimpleRouter\SimpleRouter;
 use App\Support\Menssage;
-use App\Core\Connect;
+use App\Core\Models;
 
 try {
 
@@ -33,6 +33,5 @@ try {
     Helpers::redirect('404');
 }
 
-
-$conn = Connect::getInstance();
-var_dump($conn);
+$posts = (new Models())->find();
+var_dump($posts);
