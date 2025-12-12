@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="container text-center error-container">
+  <h1 class="error-code text-danger">404</h1>
+  <h2 class="fw-bold">Página não encontrada</h2>
+  <p class="error-message text-muted">A página que você procura pode ter sido removida, renomeada ou estar
+    temporariamente indisponível.</p>
+
+
+  <a href="{{ constant('URL_DESENVOLVIMENTO') }}" class="btn btn-primary mt-3">Voltar para a página inicial</a>
+</div>
+{% endblock %}

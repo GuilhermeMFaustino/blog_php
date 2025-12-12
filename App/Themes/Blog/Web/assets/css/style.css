@@ -1,0 +1,32 @@
+body {
+    background-color: #f8f9fa;
+}
+
+/*Inicial*/
+
+.post-card img {
+max-height: 220px;
+object-fit: cover;
+}
+.navbar-brand {
+font-weight: bold;
+font-size: 1.5rem;
+}
+footer {
+margin-top: 40px;
+}
+
+/**error*/
+.error-container {
+margin-top: 10%;
+}
+.error-code {
+font-size: 6rem;
+font-weight: 700;
+}
+.error-message {
+font-size: 1.3rem;
+}
+a.btn-primary {
+padding: 12px 25px;
+}

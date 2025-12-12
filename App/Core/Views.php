@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace App\Core;
@@ -18,27 +18,36 @@ class Views
      */
     public function __construct(string $folder)
     {
-       $loader = new \Twig\Loader\FilesystemLoader($folder);
-       $this->twig = new \Twig\Environment($loader);
+        $loader = new \Twig\Loader\FilesystemLoader($folder);
+        $this->twig = new \Twig\Environment($loader);
 
-       $lexer = new Lexer($this->twig, array($this->helpers()));
-       $this->twig->setLexer($lexer);
+        $lexer = new Lexer($this->twig, array($this->helpers()));
+        $this->twig->setLexer($lexer);
     }
 
-    public function render(string $view, array $dados): string
+    public function render(string $view, array $dados = []): string
     {
-        return $this->twig->render($view,$dados);
+        // verifica se a view existe
+        if (!$this->twig->getLoader()->exists($view)) {
+            return "A View '{$view}' não foi encontrada.";
+        }
+
+        return $this->twig->render($view, $dados);
     }
 
+    /**
+     * Summary of helpers | configura as funcoes para ser exibidas no site.
+     * @return void
+     */
     public function helpers()
     {
         array(
             $this->twig->addFunction(
-                new TwigFunction('url', function(string $url = null){
-                    return Helpers::saudacoes();
+                new TwigFunction('url', function (?string $url = null) {
+                    return Helpers::url($url);
                 })
 
-        ));
+            )
+        );
     }
-
 }

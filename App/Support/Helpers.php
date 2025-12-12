@@ -6,6 +6,16 @@ use Source\Config;
 
 class Helpers
 {
+
+    public static function redirect(?string $url = null)
+    {
+        header('HTTP/1.1 302 Found');
+        $local = ($url ? self::url($url) : self::url());
+        header("Location: {$local} ");
+        exit();
+    }
+
+
     /**
      * Summary of valorFormat
      * @param mixed $valor
@@ -78,11 +88,18 @@ class Helpers
      * @param string $url
      * @return string
      */
+
+
     public static function url(?string $url = null): string
-    {
-        $srevidor = filter_input(INPUT_SERVER, 'SERVER_NAME');
-        $ambiente = ($srevidor == 'localhostc' ? URL_DESENVOLVIMENTO : URL_PRODUCAO);
-        return $ambiente . "/" . $url;
+    {        
+            $servidor = $_SERVER['SERVER_NAME'];
+
+            if ($servidor == 'localhost') {
+                $base = URL_DESENVOLVIMENTO; 
+            } else {
+                $base = URL_PRODUCAO; 
+            }
+          return $base . "/" . ltrim($url, "/");
     }
 
 

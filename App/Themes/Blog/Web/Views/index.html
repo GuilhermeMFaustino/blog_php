@@ -1,11 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ titulo }}</title>
-</head>
-<body>
-    {{ url() }}
-</body>
-</html>
+{% extends "main.html" %}
+
+{% block content %}
+<!-- POSTS -->
+<div class="container my-4">
+    <div class="row g-4">
+        <!-- Post 1 -->
+        <div class="col-md-4">
+            <div class="card post-card shadow-sm">
+                <img src="https://picsum.photos/600/400?random=1" class="card-img-top" alt="Post 1">
+                <div class="card-body">
+                    <h5 class="card-title">Título do Post 1</h5>
+                    <p class="card-text">Uma prévia do assunto tratado neste artigo do blog. Clique para ler mais.</p>
+                    <a href="#" class="btn btn-primary w-100">Ler Mais</a>
+                </div>
+            </div>
+        </div>
+        <!-- Post 2 -->
+        <div class="col-md-4">
+            <div class="card post-card shadow-sm">
+                <img src="https://picsum.photos/600/400?random=2" class="card-img-top" alt="Post 2">
+                <div class="card-body">
+                    <h5 class="card-title">Título do Post 2</h5>
+                    <p class="card-text">Conteúdo de destaque sobre tendências, produtos e mercado.</p>
+                    <a href="#" class="btn btn-primary w-100">Ler Mais</a>
+                </div>
+            </div>
+        </div>
+        <!-- Post 3 -->
+        <div class="col-md-4">
+            <div class="card post-card shadow-sm">
+                <img src="https://picsum.photos/600/400?random=3" class="card-img-top" alt="Post 3">
+                <div class="card-body">
+                    <h5 class="card-title">Título do Post 3</h5>
+                    <p class="card-text">Dicas úteis e informações relevantes para os clientes.</p>
+                    <a href="#" class="btn btn-primary w-100">Ler Mais</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
