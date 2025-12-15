@@ -4,6 +4,7 @@ use App\Support\Helpers;
 use Pecee\SimpleRouter\SimpleRouter;
 use App\Support\Menssage;
 use App\Core\Models;
+use App\Models\Posts;
 
 try {
 
@@ -33,5 +34,5 @@ try {
     Helpers::redirect('404');
 }
 
-$posts = (new Models())->find();
+$posts = (new Posts())->find();
 var_dump($posts);

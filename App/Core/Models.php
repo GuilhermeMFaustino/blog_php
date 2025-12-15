@@ -4,16 +4,23 @@
 namespace App\Core;
 
 use App\Core\Connect;
+use PDO;
 
-class Models
+abstract class Models
 {
     public $conn;
 
-    private $tabela;
+    protected $tabela;
     private $columns;
 
     private $query;
     private $cond;
+
+    public function __construct()
+    {
+        $this->conn = Connect::getInstance();
+
+    }
 
     public function getTabela(): mixed
     {
@@ -50,15 +57,12 @@ class Models
             $this->query = $query;
     }
 
-    public function __construct()
-    {
-       $this->conn = new Connect();
-    }
-    
     public function find(string $columns = "*") 
     {
-        $stmt = Connect::getInstance()->query("SELECT {$columns} FROM {$this->getTabela()}");        
-        $result = $stmt->fetchAll();
-        var_dump($result);
+        var_dump($this->tabela);
+
+        $stmt = Connect::getInstance()->query("SELECT {$columns} FROM {$this->tabela}");        
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
