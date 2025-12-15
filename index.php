@@ -34,5 +34,5 @@ try {
     Helpers::redirect('404');
 }
 
-$posts = (new Posts())->find();
+$posts = (new Posts())->findByid(1);
 var_dump($posts);

@@ -59,10 +59,19 @@ abstract class Models
 
     public function find(string $columns = "*") 
     {
-        var_dump($this->tabela);
-
-        $stmt = Connect::getInstance()->query("SELECT {$columns} FROM {$this->tabela}");        
+        $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela}");        
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function findByid(string $id, $terms = null, string $columns = "*")
+    {
+        $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela} WHERE id = {$id} {$terms}");
+        $findId = $stmt->fetchAll(PDO::FETCH_ASSOC);        
+        if($stmt->rowCount() >= 1){
+            return $findId;
+        }else{
+            return false;
+        }
     }
 }
