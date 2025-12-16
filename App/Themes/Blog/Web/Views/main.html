@@ -1,16 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/css/style.css')}}" />
-    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/css/message.css')}}" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="megakit,business,company,agency,multipurpose,modern,bootstrap4">
+
+    <meta name="author" content="themefisher.com">
+
     <title>{{ titulo }}</title>
+
+    <!-- bootstrap.min css -->
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+    <!-- Icon Font Css -->
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/plugins/themify/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/plugins/fontawesome/css/all.css')}}">
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/plugins/magnific-popup/dist/magnific-popup.css')}}">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/plugins/slick-carousel/slick/slick.css')}}">
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/plugins/slick-carousel/slick/slick-theme.css')}}">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/css/message.css')}}" />
+
 </head>
+
 <body>
+
     {% include 'home.html'%}
     {% block content %}
 
@@ -18,10 +36,6 @@
     {% include 'footer.html'%}
 
 
+    <script src="{{ url('App/Themes/Blog/Web/assets/js/style.js')}}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-</body>
-<script src="{{ url('App/Themes/Blog/Web/assets/js/style.js')}}"></script>
-</html>
+</div>

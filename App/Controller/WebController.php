@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Controller;
+use App\Models\Posts;
 use App\Support\Menssage;
 
 class WebController extends Controller
@@ -15,11 +16,22 @@ class WebController extends Controller
     }
     public function index()
     {
+        $posts = (new Posts())->find();
         $dados = [
             "titulo" => 'OnlineBlog',
-            "produtos" => 'produtos'
+            "posts" => $posts
         ];
         echo $this->views->render('index.html', $dados);
+    }
+
+    public function post($id)
+    {
+        $posts = (new Posts())->findByid($id);
+        $dados = [
+            "titulo" => 'Sobre',
+            "post" => $posts
+        ];
+        echo $this->views->render('post.html', $dados);       
     }
 
     public function sobre()

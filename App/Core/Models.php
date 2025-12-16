@@ -64,7 +64,8 @@ abstract class Models
         return $result;
     }
 
-    public function findByid(string $id, $terms = null, string $columns = "*")
+    
+    public function findByid(int $id, $terms = null, string $columns = "*"):array|bool|object
     {
         $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela} WHERE id = {$id} {$terms}");
         $findId = $stmt->fetchAll(PDO::FETCH_ASSOC);        

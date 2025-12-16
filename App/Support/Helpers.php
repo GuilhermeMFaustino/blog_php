@@ -91,15 +91,15 @@ class Helpers
 
 
     public static function url(?string $url = null): string
-    {        
-            $servidor = $_SERVER['SERVER_NAME'];
+    {
+        $servidor = $_SERVER['SERVER_NAME'];
 
-            if ($servidor == 'localhost') {
-                $base = URL_DESENVOLVIMENTO; 
-            } else {
-                $base = URL_PRODUCAO; 
-            }
-          return $base . "/" . ltrim($url, "/");
+        if ($servidor == 'localhost') {
+            $base = URL_DESENVOLVIMENTO;
+        } else {
+            $base = URL_PRODUCAO;
+        }
+        return $base . "/" . ltrim($url, "/");
     }
 
 
@@ -300,4 +300,21 @@ class Helpers
         }
         return $dataformatada;
     }
+
+
+
+    public static function strLmWords(string $texto, $limit = 320): string
+    {
+        $pos = strip_tags($texto);
+        $posLimpo = strlen($pos);
+        if ($posLimpo <= $limit) {
+            return $texto;
+        } else {
+            $textCortado = substr($texto, 0, $limit);
+            $novoTexto = strrpos($textCortado, ' ');
+            $textoLimit = substr($textCortado, 0, $novoTexto);
+            return $textoLimit . "...";
+        }
+    }
+
 }

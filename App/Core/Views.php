@@ -6,12 +6,10 @@ namespace App\Core;
 use Twig\Lexer;
 use Twig\TwigFunction;
 use App\Support\Helpers;
-use App\Support\Menssage;
 
 class Views
 {
     private $twig;
-    private $message;
 
     /**
      * Summary of __construct
@@ -40,15 +38,19 @@ class Views
      * Summary of helpers | configura as funcoes para ser exibidas no site.
      * @return void
      */
-    public function helpers()
-    {
-        array(
-            $this->twig->addFunction(
-                new TwigFunction('url', function (?string $url = null) {
-                    return Helpers::url($url);
-                })
 
-            )
+    public function helpers(): void
+    {
+        $this->twig->addFunction(
+            new TwigFunction('url', function (?string $url = null) {
+                return Helpers::url($url);
+            })
+        ); 
+        
+        $this->twig->addFunction(
+            new TwigFunction('strLmWords', function (?string $strLmWords = null) {
+                return Helpers::strLmWords($strLmWords);
+            })
         );
     }
 }
