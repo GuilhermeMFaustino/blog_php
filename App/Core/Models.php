@@ -10,7 +10,7 @@ abstract class Models
 {
     public $conn;
 
-    protected $tabela;
+    protected string $tabela;
     private $columns;
 
     private $query;
@@ -19,7 +19,6 @@ abstract class Models
     public function __construct()
     {
         $this->conn = Connect::getInstance();
-
     }
 
     public function getTabela(): mixed
@@ -42,37 +41,37 @@ abstract class Models
         $this->tabela = $tabela;
     }
 
-    public function setColumns( $columns): void
+    public function setColumns($columns): void
     {
         $this->columns = $columns;
     }
 
-    public function setCond( $cond): void
+    public function setCond($cond): void
     {
         $this->cond = $cond;
     }
 
     public function setQuery($query)
     {
-            $this->query = $query;
+        $this->query = $query;
     }
 
-    public function find(string $columns = "*") 
+    public function find(string $columns = "*")
     {
-        $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela}");        
+        $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela}");
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    
-    public function findByid(int $id, $terms = null, string $columns = "*"):array|bool|object
+    public function findByid(int $id, $terms = null, string $columns = "*"): array|bool|object
     {
         $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela} WHERE id = {$id} {$terms}");
-        $findId = $stmt->fetchAll(PDO::FETCH_ASSOC);        
-        if($stmt->rowCount() >= 1){
+        $findId = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($stmt->rowCount() >= 1) {
             return $findId;
-        }else{
+        } else {
             return false;
         }
     }
+
 }

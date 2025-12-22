@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Core\Controller;
+use App\Models\Category;
 use App\Models\Posts;
 use App\Support\Menssage;
 
@@ -17,21 +18,28 @@ class WebController extends Controller
     public function index()
     {
         $posts = (new Posts())->find();
+        $category = (new Category())->findByCategory();     
+       
+        //var_dump($category);
+
         $dados = [
             "titulo" => 'OnlineBlog',
-            "posts" => $posts
+            "posts" => $posts,
+            "category" => $category
         ];
         echo $this->views->render('index.html', $dados);
     }
 
-    public function post($id)
+    public function post(int $id)
     {
-        $posts = (new Posts())->findByid($id);
+        $product = (new Posts())->findByid($id);
+        //var_dump($product);
+
         $dados = [
             "titulo" => 'Sobre',
-            "post" => $posts
+            "product" => $product
         ];
-        echo $this->views->render('post.html', $dados);       
+        echo $this->views->render('post.html', $dados);
     }
 
     public function sobre()
