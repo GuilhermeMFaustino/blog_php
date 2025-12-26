@@ -42,6 +42,20 @@ class WebController extends Controller
         echo $this->views->render('post.html', $dados);
     }
 
+    public function buscar(): void
+    {
+       $pesquisar = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+       if(isset($pesquisar)){
+         $search = (new Posts())->pesquisar($pesquisar['buscar']);
+            $dados = [
+                "titulo" => 'Sobre',
+                "search" => $search
+            ];
+            echo $this->views->render('buscar.html', $dados);
+       }
+    }
+    
+
     public function sobre()
     {
         $dados = [

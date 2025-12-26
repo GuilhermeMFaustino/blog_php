@@ -1,16 +1,13 @@
 <?php
 
-use App\Support\Helpers;
 use Pecee\SimpleRouter\SimpleRouter;
-use App\Support\Menssage;
-use App\Core\Models;
-use App\Models\Posts;
+use App\Support\Helpers;
 
 try {
     require 'vendor/autoload.php';
 
     $requestUri = $_SERVER['REQUEST_URI'];
-    
+
     if (strpos($requestUri, '/App/Themes/') !== false) {
         return false; // deixa o Apache servir
     }
@@ -23,11 +20,18 @@ try {
     SimpleRouter::get("blog/post/{id}", 'WebController@post');
 
 
+    SimpleRouter::post("blog/buscar", 'WebController@buscar');
+
+
     /**Redirecionamento 404 */
-    SimpleRouter::get('blog/404', 'WebController@erro404');
+    SimpleRouter::get('blog/404', 'WebController@erro404');    
 
     SimpleRouter::start();
+
 } catch (Exception $e) {
-    $e->getMessage();
-     //Helpers::redirect('404');
+    if(Helpers::localhost()) {
+        echo $e->getMessage();
+    } else {
+        Helpers::redirect('404');
+    }
 }
