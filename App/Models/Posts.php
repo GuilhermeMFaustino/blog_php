@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 
 namespace App\Models;
@@ -13,6 +13,13 @@ class Posts extends Models
 
     public function pesquisar(?string $text): array
     {
+       $sql = "SELECT * FROM category WHERE posts LIKE '%{$text}%' OR title LIKE '%{$text}%'";
+        $stmt = $this->conn->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /*public function pesquisar(?string $text): array
+    {
         $sql = "SELECT p.*, c.title AS category_title FROM posts p
          INNER JOIN category c ON p.id_categoria = c.id 
          WHERE p.posts LIKE :text  OR p.posts LIKE :text  OR c.title LIKE :text";
@@ -21,5 +28,6 @@ class Posts extends Models
         $stmt->bindValue(':text', '%' . $text . '%', PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    }*/
+
 }

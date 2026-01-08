@@ -34,7 +34,7 @@ class Helpers
     public static function localhost(): bool
     {
         $server = filter_input(INPUT_SERVER, 'SERVER_NAME');
-        var_dump($server);
+        //var_dump($server);
 
         if ($server == SERVIDOR_DESENVOLVIMENTO) {
             return true;

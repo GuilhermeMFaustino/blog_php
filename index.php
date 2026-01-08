@@ -12,7 +12,7 @@ try {
         return false; // deixa o Apache servir
     }
 
-    /** */
+    /**Web**/
     SimpleRouter::setDefaultNamespace('App\Controller');
 
     SimpleRouter::get("blog/", 'WebController@index');
@@ -21,6 +21,14 @@ try {
 
 
     SimpleRouter::post("blog/buscar", 'WebController@buscar');
+
+
+
+    /**Admin */
+
+    SimpleRouter::group(['namespace' => 'Admin'], function(){
+        SimpleRouter::get('blog/admin/', 'AdminController@index');
+    });
 
 
     /**Redirecionamento 404 */
