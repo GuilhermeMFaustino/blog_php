@@ -8,7 +8,8 @@ use PDO;
 
 class Category extends Models
 {
-    protected string $category = 'category';
+    protected string $tabela = 'category';
+
 
     public function findByCategory(?string $terms = null, string $columns = "*"): array
     {
@@ -16,5 +17,29 @@ class Category extends Models
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
+
+    public function save(string $table, array $dados): bool
+    {
+
+        $query = "INSERT INTO {$table} (title, text, status) VALUES (?, ?, ?)";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$dados['title'], $dados['text'], $dados['status']]);
+    }
+
+    public function update(string $table, int $id, array $dados): bool
+    {
+
+        $stmt = "UPDATE {$table} SET title = :title, text = :text, status = :status WHERE id = {$id}";
+        $stmt = $this->conn->prepare($stmt);
+        return $stmt->execute($dados);
+    }
+
+
+    public function delet(string $table, int $id): bool
+    {
+        $stmt = "DELETE FROM {$table} WHERE id = {$id}";
+        $stmt = $this->conn->prepare($stmt);
+        return $stmt->execute();
+    }
 }

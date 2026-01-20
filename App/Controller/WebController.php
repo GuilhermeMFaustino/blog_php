@@ -18,14 +18,13 @@ class WebController extends Controller
     public function index()
     {
         $posts = (new Posts())->find();
-        $category = (new Category())->findByCategory();     
-       
-        //var_dump($category);
+        $category = (new Category())->findByCategory();   
 
         $dados = [
             "titulo" => 'OnlineBlog',
             "posts" => $posts,
-            "category" => $category
+            "category" => $category,
+            
         ];
         echo $this->views->render('index.html', $dados);
     }

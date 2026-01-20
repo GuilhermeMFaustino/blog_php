@@ -58,20 +58,27 @@ abstract class Models
 
     public function find(string $columns = "*")
     {
-        $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela}");
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = ("SELECT {$columns} FROM {$this->tabela}");
+        $stmt = $this->conn->prepare($stmt);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
 
     public function findByid(int $id, $terms = null, string $columns = "*"): array|bool|object
     {
-        $stmt = $this->conn->query("SELECT {$columns} FROM {$this->tabela} WHERE id = {$id} {$terms}");
-        $findId = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($stmt->rowCount() >= 1) {
-            return $findId;
+        $stmt = "SELECT {$columns} FROM {$this->tabela} WHERE id = {$id} {$terms}";
+        $stmt = $this->conn->prepare($stmt);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_OBJ);
+        if ($resultado) {
+            return $resultado;
         } else {
             return false;
         }
     }
+
+
+    
 
 }

@@ -1,0 +1,25 @@
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include "partials/styles.html" %}
+</head>
+
+
+<body>
+
+{% include "partials/sidebar.html" %}
+{% include "partials/header.html" %}
+
+<!-- MAIN CONTAINER (APENAS UM) -->
+<main class="nxl-container">
+    {% block content %}{% endblock %}
+</main>
+
+{% include "partials/footer.html" %}
+{% include "partials/theme-customizer.html" %}
+{% include "partials/scripts.html" %}
+
+</body>
+</html>

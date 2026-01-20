@@ -1,0 +1,287 @@
+{% extends "main.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="nxl-content">
+
+    <div class="page-header">
+        <h5>Dashboard</h5>
+    </div>
+
+    
+    <div class="main-content">
+        <div class="row">
+            
+            <div class="col-xxl-8">
+                        <div class="card stretch stretch-full">
+                            <div class="card-header">
+                                <h5 class="card-title">Visitors Overview</h5>
+                                <div class="card-header-action">
+                                    <div class="card-header-btn">
+                                        <div data-bs-toggle="tooltip" title="Delete">
+                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-danger" data-bs-toggle="remove"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Refresh">
+                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-warning" data-bs-toggle="refresh"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
+                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-success" data-bs-toggle="expand"> </a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="javascript:void(0);" class="avatar-text avatar-sm" data-bs-toggle="dropdown" data-bs-offset="25, 25">
+                                            <div data-bs-toggle="tooltip" title="Options">
+                                                <i class="feather-more-vertical"></i>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-at-sign"></i>New</a>
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-calendar"></i>Event</a>
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-bell"></i>Snoozed</a>
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-trash-2"></i>Deleted</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-settings"></i>Settings</a>
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-life-buoy"></i>Tips & Tricks</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body custom-card-action">
+                                <div id="visitors-overview-statistics-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                       <div class="row">   
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-primary text-white">
+                                            <i class="feather-users"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">Total Customers</span>
+                                            <span class="fs-24 fw-bolder d-block">26,595</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-success text-success">
+                                        <i class="feather-arrow-up fs-10 me-1"></i>
+                                        <span>36.85%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-success text-white">
+                                            <i class="feather-user-check"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">Active Customers</span>
+                                            <span class="fs-24 fw-bolder d-block">2,245</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-danger text-danger">
+                                        <i class="feather-arrow-down fs-10 me-1"></i>
+                                        <span>24.56%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-teal text-white">
+                                            <i class="feather-user-plus"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">New Customers</span>
+                                            <span class="fs-24 fw-bolder d-block">1,254</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-success text-success">
+                                        <i class="feather-arrow-up fs-10 me-1"></i>
+                                        <span>33.29%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-danger text-white">
+                                            <i class="feather-user-minus"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">Inactive Customers</span>
+                                            <span class="fs-24 fw-bolder d-block">4,586</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-danger text-danger">
+                                        <i class="feather-arrow-down fs-10 me-1"></i>
+                                        <span>42.47%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <!-- [Mini Card] start -->
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start justify-content-between mb-4">
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div class="avatar-text avatar-lg bg-gray-200">
+                                            <i class="feather-dollar-sign"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fs-4 fw-bold text-dark"><span class="counter">{{ total.ativo }}</span></div>
+                                            <h3 class="fs-13 fw-semibold text-truncate-1-line">Posts Ativos</h3>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0);" class="">
+                                        <i class="feather-more-vertical"></i>
+                                    </a>
+                                </div>
+                                <div class="pt-4">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Invoices Awaiting </a>
+                                        <div class="w-100 text-end">
+                                            <span class="fs-12 text-dark">$5,569</span>
+                                            <span class="fs-11 text-muted">(56%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress mt-2 ht-3">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 56%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start justify-content-between mb-4">
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div class="avatar-text avatar-lg bg-gray-200">
+                                            <i class="feather-cast"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fs-4 fw-bold text-dark"><span class="counter">{{ total.inativo }}</span></div>
+                                            <h3 class="fs-13 fw-semibold text-truncate-1-line">Posts Inativos</h3>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0);" class="">
+                                        <i class="feather-more-vertical"></i>
+                                    </a>
+                                </div>
+                                <div class="pt-4">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Converted Leads </a>
+                                        <div class="w-100 text-end">
+                                            <span class="fs-12 text-dark">52 Completed</span>
+                                            <span class="fs-11 text-muted">(63%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress mt-2 ht-3">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 63%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start justify-content-between mb-4">
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div class="avatar-text avatar-lg bg-gray-200">
+                                            <i class="feather-briefcase"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fs-4 fw-bold text-dark"><span class="counter">{{ total.total }}</div>
+                                            <h3 class="fs-13 fw-semibold text-truncate-1-line">Posts Cadastrados</h3>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0);" class="">
+                                        <i class="feather-more-vertical"></i>
+                                    </a>
+                                </div>
+                                <div class="pt-4">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Projects In Progress </a>
+                                        <div class="w-100 text-end">
+                                            <span class="fs-12 text-dark">16 Completed</span>
+                                            <span class="fs-11 text-muted">(78%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress mt-2 ht-3">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 78%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start justify-content-between mb-4">
+                                    <div class="d-flex gap-4 align-items-center">
+                                        <div class="avatar-text avatar-lg bg-gray-200">
+                                            <i class="feather-activity"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fs-4 fw-bold text-dark"><span class="counter">03</span></div>
+                                            <h3 class="fs-13 fw-semibold text-truncate-1-line">Novos Videos</h3>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0);" class="">
+                                        <i class="feather-more-vertical"></i>
+                                    </a>
+                                </div>
+                                <div class="pt-4">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line"> Conversion Rate </a>
+                                        <div class="w-100 text-end">
+                                            <span class="fs-12 text-dark">$2,254</span>
+                                            <span class="fs-11 text-muted">(46%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="progress mt-2 ht-3">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 46%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [Mini Card] end -->
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

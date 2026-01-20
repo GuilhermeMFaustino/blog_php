@@ -52,5 +52,7 @@ class Views
                 return Helpers::strLmWords($strLmWords);
             })
         );
+
+       
     }
 }

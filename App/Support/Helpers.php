@@ -34,7 +34,7 @@ class Helpers
     public static function localhost(): bool
     {
         $server = filter_input(INPUT_SERVER, 'SERVER_NAME');
-        var_dump($server);
+        //var_dump($server);
 
         if ($server == SERVIDOR_DESENVOLVIMENTO) {
             return true;
@@ -304,7 +304,7 @@ class Helpers
 
 
 
-    public static function strLmWords(string $texto, $limit = 240): string
+    public static function strLmWords(string $texto, $limit = 80): string
     {
         $pos = strip_tags($texto);
         $posLimpo = strlen($pos);

@@ -1,0 +1,57 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="nxl-content">
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <h5>Categorias</h5>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card stretch stretch-full">
+          <div class="card-body">
+            <div class="card-body">
+              
+              <p>Cadastro de Categoria</p>
+
+              <div class="table-responsive">
+                <form action="{% if editarcategoria.id %}{{url('/admin/categorias/editar/'~editarcategoria.id)}}{% else %}{{url('/admin/categorias/cadastrar')}}{% endif %}" method="post">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+                <input type="text" name="title" id="titulo" class="form-control" value="{{editarcategoria.title}}" placeholder="Titulo">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Texto</label>
+                <textarea name="text" id="text" class="form-control" rows="3">{{ editarcategoria.text }}</textarea>
+
+            </div>
+            <div class="form-check">
+                <input class="form-check-input status-check" type="checkbox" name="status" value="1" {% if editarcategoria.status == 1 %}checked{% endif %} id="checkDefault">
+                <label class="form-check-label" for="checkDefault">
+                    ativo
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input status-check" type="checkbox" name="status" value="0" {% if editarcategoria.status == 0 %}checked{% endif %} id="checkChecked">
+                <label class="form-check-label" for="checkChecked">
+                    Inativo
+                </label>
+            </div>
+           
+            <input type="submit" class="btn btn-primary" value="{% if editarcategoria.id %}Atualizar{% else %}Cadastrar{% endif %}">
+        </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
