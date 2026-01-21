@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use App\Core\Session;
+
 class Menssage
 {
     private $text;
@@ -55,4 +57,12 @@ class Menssage
         $this->text = $this->filtrar($mensagem);
         return $this;
     }
+
+    public function flash(): void
+    {
+        $session = new Session();
+        $session->create('flash', $this);
+    }
+
+    
 }

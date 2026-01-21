@@ -20,43 +20,48 @@
               <p>Bem-vindo a pagina de Categoria</p>
 
               <div class="table-responsive">
-                    <form action="{% if editarposts.id %}{{url('/admin/posts/editar/'~editarposts.id)}}{% else %}{{url('/admin/posts/cadastrar')}}{% endif %}" method="post">
+                <form
+                  action="{% if editarposts.id %}{{url('/admin/posts/editar/'~editarposts.id)}}{% else %}{{url('/admin/posts/cadastrar')}}{% endif %}"
+                  method="post">
 
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Titulo</label>
-                <input type="text" name="posts" id="titulo" class="form-control" placeholder="Titulo" value="{{ editarposts.posts }}">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Texto</label>
-                <textarea name="text" id="text" class="form-control" rows="3">{{ editarposts.text }}</textarea>
-            </div>
-            
+                  <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Titulo</label>
+                    <input type="text" name="posts" id="titulo" class="form-control" placeholder="Titulo"
+                      value="{{ editarposts.posts }}">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Texto</label>
+                    <textarea name="text" id="text" class="form-control" rows="3">{{ editarposts.text }}</textarea>
+                  </div>
 
-            <div class="mb-3">
-                <select class="form-select form-control" name="id_categoria" aria-label="Default select example">
-                    <option selected>Categorias</option>
-                    {% for category in categorias %}
-                    <option selected value="{{category.id}}">{{ category.title }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input status-check" type="checkbox" name="status" value="1" {% if editarcategoria.status == 1 %}checked{% endif %} id="checkDefault"
-                    checked>
-                <label class="form-check-label" for="checkDefault">
-                    Ativo
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input status-check" type="checkbox" name="status" value="0" {% if editarcategoria.status == 1 %}checked{% endif %} id="checkChecked">
-                <label class="form-check-label" for="checkChecked">
-                    Inativo
-                </label>
-            </div>
 
-            
-            <input type="submit" class="btn btn-primary" value="{% if editarposts.id %}Atualizar{% else %}Cadastrar{% endif %}">
-        </form>
+                  <div class="mb-3">
+                    <select class="form-select form-control" name="id_categoria" aria-label="Default select example">
+                      <option selected>Categorias</option>
+                      {% for category in categorias %}
+                      <option selected value="{{category.id}}">{{ category.title }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="statusAtivo" value="1" {% if
+                      editarcategoria.status == 1 %}checked{% endif %}>
+                    <label class="form-check-label" for="statusAtivo">
+                      Ativo
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="statusInativo" value="0" {% if
+                      editarcategoria.status == 0 %}checked{% endif %}>
+                    <label class="form-check-label" for="statusInativo">
+                      Inativo
+                    </label>
+                  </div>
+
+                  <input type="submit" class="btn btn-primary"
+                    value="{% if editarposts.id %}Atualizar{% else %}Cadastrar{% endif %}">
+                </form>
               </div>
             </div>
           </div>

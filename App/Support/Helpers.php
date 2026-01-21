@@ -2,10 +2,22 @@
 
 namespace App\Support;
 
+use App\Core\Session;
 use Source\Config;
 
 class Helpers
 {
+
+    public static function flash(): ?string
+    {
+        $session = new Session();
+
+        if($flash = $session->flash())
+        {
+            echo $flash;
+        }
+        return null;
+    }
 
     public static function redirect(?string $url = null)
     {

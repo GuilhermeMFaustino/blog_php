@@ -35,6 +35,7 @@ class AdminPostsController extends Controller
 
         if (!empty($posts)) {
             (new Posts())->save('posts', $posts);
+            $this->menssage->success('Post Cadastrado com sucesso')->flash();
             Helpers::redirect('/admin/posts/listar');
             return;            
         }
@@ -54,7 +55,7 @@ class AdminPostsController extends Controller
         $categorias = (new Category())->find();
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
-            (new Posts())->update('posts', $id, $dados);
+            (new Posts())->update($dados, $id);            
             Helpers::redirect('/admin/posts/listar');
         }
 
@@ -70,10 +71,8 @@ class AdminPostsController extends Controller
     public function deletar(int $id): void
     {
         $id = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $post = (new Posts())->findByid($id);
-
         if (isset($post)) {
-            (new Posts())->delet('posts', $id);
+            (new Posts())->delete( $id);
             Helpers::redirect('/admin/posts/listar');
         }
     }

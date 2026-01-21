@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Support\Menssage;
+
 class Session
 {
     public function __construct()
@@ -43,6 +45,24 @@ class Session
         return $this;
     }
 
+    public function __get($flash)
+    {
+        if(!empty($_SESSION[$flash])){
+            return $_SESSION[$flash];
+        }
+    }
+
+    public function flash(): ?Menssage
+    {
+        if($this->check('flash'))
+        {
+            $flash = $this->flash;
+            $this->clean('flash');
+            return $flash;
+        }
+            return null;
+        
+    }
 
 }
 

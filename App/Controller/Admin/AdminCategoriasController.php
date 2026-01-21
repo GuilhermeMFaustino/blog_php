@@ -48,7 +48,7 @@ class AdminCategoriasController extends Controller
         
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
-            (new Category())->update('category', $id, $dados);
+            (new Category())->update($dados, $id);
             Helpers::redirect('/admin/categorias/listar');
         }
 
@@ -61,9 +61,13 @@ class AdminCategoriasController extends Controller
     }
 
     public function deletar(int $id): void
-    {      
+    {    
                  
-            (new Posts())->delet('category',$id);
-            Helpers::redirect('/admin/categorias/listar');
+        var_dump($id);
+        //$id = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if (isset($id)) {
+            (new Category())->delete( $id);
+             Helpers::redirect('/admin/categorias/listar');
+        }
     }
 }

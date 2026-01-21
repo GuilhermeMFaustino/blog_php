@@ -5,12 +5,19 @@ namespace App\Core;
 
 use App\Core\Connect;
 use PDO;
+use PDOException;
 
 abstract class Models
 {
     public $conn;
 
-    protected string $tabela;
+    protected string $table;
+
+    protected string $order;
+    protected string $limit;
+    protected string $offset;
+    protected string $error;
+
     private $columns;
 
     private $query;
@@ -23,7 +30,7 @@ abstract class Models
 
     public function getTabela(): mixed
     {
-        return $this->tabela;
+        return $this->table;
     }
 
     public function getColumns(): mixed
@@ -38,7 +45,7 @@ abstract class Models
 
     public function setTabela($tabela): void
     {
-        $this->tabela = $tabela;
+        $this->table = $tabela;
     }
 
     public function setColumns($columns): void
@@ -58,16 +65,80 @@ abstract class Models
 
     public function find(string $columns = "*")
     {
-        $stmt = ("SELECT {$columns} FROM {$this->tabela}");
+        $stmt = ("SELECT {$columns} FROM {$this->table}");
+        $stmt .= $this->order ?? '';
+        $stmt .= $this->limit ?? '';
+        $stmt .= $this->offset ?? '';
         $stmt = $this->conn->prepare($stmt);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $result;
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function save(string $table, array $dados): bool|string|null
+    {
+
+        try {
+            $colums = implode(', ', array_keys($dados));
+            $values = ':' . implode(',:', array_keys($dados));
+            $query = "INSET INTO {$this->table} {$colums} VALUES {$values}";
+            $stmt = Connect::getInstance()->prepare($query);
+            $stmt->execute($this->filter($dados));
+
+            return Connect::getInstance()->lastInsertId();
+        } catch (PDOException $ex) {
+            echo $this->error = $ex;
+            return null;
+        }
+    }
+
+    public function update(array $dados, string $id): ?int
+    {
+        try {
+            $set = [];
+
+            foreach ($dados as $key => $value) {
+                $set[] = "{$key} = :{$key}";
+            }
+            $sql = "UPDATE {$this->table}
+                SET " . implode(', ', $set) . "
+                WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $dados['id'] = $id;
+            $stmt->execute($dados);
+            return $stmt->rowCount();
+        } catch (PDOException $ex) {
+            $this->error = $ex->getMessage();
+            return null;
+        }
+    }
+
+    public function delete(string $id)
+    {
+        try {
+
+            $this->conn->beginTransaction();
+
+            $stmt = $this->conn->prepare(
+                "DELETE FROM posts WHERE id_categoria = :id"
+            );
+            $stmt->execute(['id' => $id]);
+
+            $stmt = $this->conn->prepare(
+                "DELETE FROM category WHERE id = :id"
+            );
+            $stmt->execute(['id' => $id]);
+
+            $this->conn->commit();
+        } catch (PDOException $ex) {
+            echo $this->error = $ex;
+        }
+    }
+
+
 
     public function findByid(int $id, $terms = null, string $columns = "*"): array|bool|object
     {
-        $stmt = "SELECT {$columns} FROM {$this->tabela} WHERE id = {$id} {$terms}";
+        $stmt = "SELECT {$columns} FROM {$this->table} WHERE id = {$id} {$terms}";
         $stmt = $this->conn->prepare($stmt);
         $stmt->execute();
         $resultado = $stmt->fetch(PDO::FETCH_OBJ);
@@ -78,7 +149,50 @@ abstract class Models
         }
     }
 
+    public function order(string $order): ?object
+    {
+        $this->order = " ORDER BY {$order}";
+        return $this;
+    }
 
-    
+    public function limit(string $limit): ?object
+    {
+        $this->limit = " LIMIT {$limit}";
+        return $this;
+    }
 
+    public function offset(string $offset): ?object
+    {
+        $this->offset = " OFFSET BY {$offset}";
+        return $this;
+    }
+
+    private function filter(array $dados)
+    {
+        $filtro = [];
+
+        foreach ($dados as $chave => $valor) {
+            $filtro[$chave] = (is_null($valor) ? null : filter_var($valor, FILTER_DEFAULT));
+        }
+    }
+
+    /*public function result(bool $dados = false)
+    {
+        try {
+            $stmt = Connect::getInstance()->prepare($this->query);
+            $stmt->execute($this->params);
+
+            if (!$stmt->rowCount()) {
+                return null;
+            }
+
+            if ($dados) {
+                return $stmt->fetchAll();
+            }
+
+            return $stmt->fetch();
+        } catch (PDOException $ex) {
+            $this->erro = $ex;
+        }
+    }*/
 }

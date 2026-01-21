@@ -53,6 +53,12 @@ class Views
             })
         );
 
+        $this->twig->addFunction(
+            new TwigFunction('flash', function () {
+                return Helpers::flash();
+            })
+        );
+
        
     }
 }
