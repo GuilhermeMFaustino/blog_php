@@ -1,7 +1,7 @@
 <nav class="nxl-navigation">
         <div class="navbar-wrapper">
             <div class="m-header">
-                <a href="index.html" class="b-brand">
+                <a href="{{ url('/admin')}}" class="b-brand">
                     <!-- ========   change your logo hear   ============ -->
                     <img src="{{ url('App/Themes/Blog/admin/assets/images/logo-full.png')}}" alt="" class="logo logo-lg" />
                     <img src="{{ url('App/Themes/Blog/admin/assets/images/logo-abbr.png')}}" alt="" class="logo logo-sm" />
@@ -12,28 +12,16 @@
                     <li class="nxl-item nxl-caption">
                         <label>Navigation</label>
                     </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
+                    <li class="">
+                        <a href="{{ url('/admin/posts/listar')}}" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-clipboard"></i></span>
+                            <span class="nxl-mtext">Posts</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                        </a>
+                        <a href="{{ url('/admin/categorias/listar')}}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-airplay"></i></span>
-                            <span class="nxl-mtext">Dashboards</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="{{ url('/admin/posts/listar')}}">Posts</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="{{ url('/admin/categorias/listar')}}">Categoria</a></li>
-                        </ul>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="javascript:void(0);" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-cast"></i></span>
-                            <span class="nxl-mtext">Reports</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
-                        </a>
-                        <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="reports-sales.html">Posts</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="reports-leads.html">Catgoria</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="reports-project.html">Project Report</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="reports-timesheets.html">Timesheets Report</a></li>
-                        </ul>
-                    </li>
+                            <span class="nxl-mtext">Categoria</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                        </a>                                            
+                    </li>                    
                 </ul>
             </div>
         </div>

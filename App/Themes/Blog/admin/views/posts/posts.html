@@ -3,11 +3,14 @@
 <div class="nxl-content">
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="page-header-left">
-      <h5>Categorias</h5>
+    <div class="page-header-title">
+      <h5 class="m-b-10">Dashboard</h5>
     </div>
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Posts</a></li>
+      <li class="breadcrumb-item">Posts</li>
+    </ul>
   </div>
-
   <!-- MAIN CONTENT -->
   <div class="main-content">
     <div class="row">
@@ -16,49 +19,46 @@
           <div class="card-body">
             {{ flash() }}
             <div class="card-body">
-              <a
-                href="{{url('/admin/posts/cadastrar') }}"
-                class="btn btn-primary"
-                value="Cadastrar Categoria"
-                style="margin-bottom: 10px"
-                >Cadastrar Posts</a
-              >
-              <p>Bem-vindo a pagina de Categoria</p>
+              <a href="{{url('/admin/posts/cadastrar') }}" class="btn btn-primary" value="Cadastrar Categoria"
+                style="margin-bottom: 10px; max-width: 180px;">Cadastrar Posts</a>
+              <p>Bem-vindo a pagina de Posts</p>
               <div class="table-responsive">
                 <table class="table">
-                <thead>
+                  <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Texto</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">data de cadastro</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Deletar</th>
+                      <th scope="col">#</th>
+                      <th scope="col">Titulo</th>
+                      <th scope="col">Texto</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">data de cadastro</th>
+                      <th scope="col">Editar</th>
+                      <th scope="col">Deletar</th>
                     </tr>
-                </thead>
-                <tbody>
+                  </thead>
+                  <tbody>
                     {% for post in posts %}
                     <tr>
-                        <th scope="row">{{post.id}}</th>
-                        <td>{{post.posts}}</td>
-                        <td>{{ strLmWords(post.text) }}</td>
-                        
-                        <td>
-                            {% if post.status == 1 %}
-                            <i class="bi bi-check text-success"></i>
-                            {% else %}
-                            <i class="bi bi-x-circle text-danger"></i>
-                            {% endif %}
-                        </td>
-                        <td>{{ post.created_at|date("d/m/Y H:i:s") }}</td>
-                        <td><a href="{{url('/admin/posts/editar/'~post.id)}}"><i class="bi bi-pencil-square text-info"></i></a></td>
-                        <td><a href="{{url('/admin/posts/deletar/'~post.id)}}"><i class="bi bi-trash3 text-danger"></i></a></td>
+                      <th scope="row">{{post.id}}</th>
+                      <td>{{post.posts}}</td>
+                      <td>{{ strLmWords(post.text) }}</td>
+
+                      <td>
+                        {% if post.status == 1 %}
+                        <i class="bi bi-check text-success"></i>
+                        {% else %}
+                        <i class="bi bi-x-circle text-danger"></i>
+                        {% endif %}
+                      </td>
+                      <td>{{ post.created_at|date("d/m/Y H:i:s") }}</td>
+                      <td><a href="{{url('/admin/posts/editar/'~post.id)}}"><i
+                            class="bi bi-pencil-square text-info"></i></a></td>
+                      <td><a href="{{url('/admin/posts/deletar/'~post.id)}}"><i
+                            class="bi bi-trash3 text-danger"></i></a></td>
                     </tr>
                     {% endfor %}
-                    
-                </tbody>
-            </table>
+
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

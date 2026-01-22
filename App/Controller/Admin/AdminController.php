@@ -4,22 +4,29 @@
 namespace App\Controller\Admin;
 
 use App\Core\Controller;
-use App\Core\Session\Session;
 use App\Models\Posts;
+use App\Support\Helpers;
 
 class AdminController extends Controller
 {
      
 
+    //protected $user = false;
+
     public function __construct()
     {
-        return parent::__construct('App/Themes/Blog/admin/views/');
+        $user = false;
+        
+         if(!$user){
+            //$this->message->error('teste');
+             Helpers::redirect('/admin/login');
+         }
+       return parent::__construct('App/Themes/Blog/admin/views/');
 
-       
+        
     }
     public function index()
-    {
-
+    { 
         $posts = (new Posts());
          $dados = [
             "titulo" => 'Admin - OnlineBlog',
@@ -31,4 +38,6 @@ class AdminController extends Controller
         ];
         echo $this->views->render('index.html', $dados);
     }
+
+   
 }

@@ -48,7 +48,7 @@ class AdminCategoriasController extends Controller
         
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
-            (new Category())->update($dados, $id);
+            (new Category())->update($dados, "id = {$id}");
             Helpers::redirect('/admin/categorias/listar');
         }
 

@@ -28,7 +28,7 @@ class Views
     {
         // verifica se a view existe
         if (!$this->twig->getLoader()->exists($view)) {
-            return "A View '{$view}' não foi encontrada.";
+           return "A Template View '{$view}' não foi encontrada.";           
         }
 
         return $this->twig->render($view, $dados);

@@ -26,6 +26,10 @@ try {
     /**Admin */
 
     SimpleRouter::group(['namespace' => 'Admin'], function(){
+
+        /**AdminLogin */
+         SimpleRouter::match(['get', 'post'], 'blog/admin/login', 'AdminLoginController@login');
+
         SimpleRouter::get('blog/admin/', 'AdminController@index');
 
 
@@ -47,7 +51,6 @@ try {
         /**Deletar */
         SimpleRouter::get( 'blog/admin/categorias/deletar/{id}', 'AdminCategoriasController@deletar');
         SimpleRouter::get( 'blog/admin/posts/deletar/{id}', 'AdminCategoriasController@deletar');
-
 
     });
     

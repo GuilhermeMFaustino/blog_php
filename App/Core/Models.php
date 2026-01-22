@@ -91,19 +91,16 @@ abstract class Models
         }
     }
 
-    public function update(array $dados, string $id): ?int
+    public function update(array $dados, string $termos): ?int
     {
         try {
             $set = [];
-
             foreach ($dados as $key => $value) {
                 $set[] = "{$key} = :{$key}";
             }
-            $sql = "UPDATE {$this->table}
-                SET " . implode(', ', $set) . "
-                WHERE id = :id";
+            $set = implode(', ', $set);
+            $sql = "UPDATE {$this->table} SET {$set} WHERE {$termos}";
             $stmt = $this->conn->prepare($sql);
-            $dados['id'] = $id;
             $stmt->execute($dados);
             return $stmt->rowCount();
         } catch (PDOException $ex) {

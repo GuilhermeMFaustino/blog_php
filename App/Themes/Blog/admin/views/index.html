@@ -9,55 +9,13 @@
     <div class="page-header">
         <h5>Dashboard</h5>
     </div>
-
-    
+        
     <div class="main-content">
-        <div class="row">
-            
-            <div class="col-xxl-8">
-                        <div class="card stretch stretch-full">
-                            <div class="card-header">
-                                <h5 class="card-title">Visitors Overview</h5>
-                                <div class="card-header-action">
-                                    <div class="card-header-btn">
-                                        <div data-bs-toggle="tooltip" title="Delete">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-danger" data-bs-toggle="remove"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Refresh">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-warning" data-bs-toggle="refresh"> </a>
-                                        </div>
-                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
-                                            <a href="javascript:void(0);" class="avatar-text avatar-xs bg-success" data-bs-toggle="expand"> </a>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="avatar-text avatar-sm" data-bs-toggle="dropdown" data-bs-offset="25, 25">
-                                            <div data-bs-toggle="tooltip" title="Options">
-                                                <i class="feather-more-vertical"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-at-sign"></i>New</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-calendar"></i>Event</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-bell"></i>Snoozed</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-trash-2"></i>Deleted</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-settings"></i>Settings</a>
-                                            <a href="javascript:void(0);" class="dropdown-item"><i class="feather-life-buoy"></i>Tips & Tricks</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body custom-card-action">
-                                <div id="visitors-overview-statistics-chart"></div>
-                            </div>
-                        </div>
-                    </div>
+         <div class="row">
 
-
-
+            <div class="">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="">
                     <div class="card-body">
                        <div class="row">   
                     <div class="col-xxl-3 col-md-6">
@@ -69,8 +27,8 @@
                                             <i class="feather-users"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
-                                            <span class="text-truncate-1-line">Total Customers</span>
-                                            <span class="fs-24 fw-bolder d-block">26,595</span>
+                                            <span class="text-truncate-1-line">Total de visitas</span>
+                                            <span class="fs-24 fw-bolder d-block">203</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-success text-success">
@@ -90,8 +48,8 @@
                                             <i class="feather-user-check"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
-                                            <span class="text-truncate-1-line">Active Customers</span>
-                                            <span class="fs-24 fw-bolder d-block">2,245</span>
+                                            <span class="text-truncate-1-line">Pessoas Online</span>
+                                            <span class="fs-24 fw-bolder d-block">200</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-danger text-danger">
@@ -111,8 +69,8 @@
                                             <i class="feather-user-plus"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
-                                            <span class="text-truncate-1-line">New Customers</span>
-                                            <span class="fs-24 fw-bolder d-block">1,254</span>
+                                            <span class="text-truncate-1-line">Total de Artigos</span>
+                                            <span class="fs-24 fw-bolder d-block">60</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-success text-success">
@@ -132,8 +90,8 @@
                                             <i class="feather-user-minus"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
-                                            <span class="text-truncate-1-line">Inactive Customers</span>
-                                            <span class="fs-24 fw-bolder d-block">4,586</span>
+                                            <span class="text-truncate-1-line">Total de Usuarios Inativos</span>
+                                            <span class="fs-24 fw-bolder d-block">5</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-danger text-danger">
@@ -280,8 +238,185 @@
                 </div>
             </div>
         </div>
+                    <div class="col-xxl-8">
+                        <div class="card stretch stretch-full">
+                            <div class="card-header">
+                                <h5 class="card-title">Visão geral dos visitantes</h5>
+                                <div class="card-header-action">
+                                    <div class="card-header-btn">
+                                        <div data-bs-toggle="tooltip" title="Collapse/Expand">
+                                            <a href="#" class="avatar-text avatar-xs bg-gray-300" data-bs-toggle="collapse"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Delete">
+                                            <a href="#" class="avatar-text avatar-xs bg-danger" data-bs-toggle="remove"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Refresh">
+                                            <a href="#" class="avatar-text avatar-xs bg-warning" data-bs-toggle="refresh"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
+                                            <a href="#" class="avatar-text avatar-xs bg-success" data-bs-toggle="expand"> </a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body custom-card-action">
+                                <div id="visitors-overview-statistics-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [Visitors Overview] end -->
+                    <!-- [Browser States] start -->
+                    <div class="col-xxl-4">
+                        <div class="card stretch stretch-full">
+                            <div class="card-header">
+                                <h5 class="card-title">Ultimos Usuarios Cadastrados</h5>
+                                <div class="card-header-action">
+                                    <div class="card-header-btn">
+                                        <div data-bs-toggle="tooltip" title="Collapse/Expand">
+                                            <a href="#" class="avatar-text avatar-xs bg-gray-300" data-bs-toggle="collapse"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Delete">
+                                            <a href="#" class="avatar-text avatar-xs bg-danger" data-bs-toggle="remove"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Refresh">
+                                            <a href="#" class="avatar-text avatar-xs bg-warning" data-bs-toggle="refresh"> </a>
+                                        </div>
+                                        <div data-bs-toggle="tooltip" title="Maximize/Minimize">
+                                            <a href="#" class="avatar-text avatar-xs bg-success" data-bs-toggle="expand"> </a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body custom-card-action p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa-brands fa-chrome fs-16 text-primary me-2"></i>
+                                                        <span>Google Chrome</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end d-flex align-items-center m-0">
+                                                        <span class="me-3">90%</span>
+                                                        <span class="progress w-100 ht-5">
+                                                            <span class="progress-bar bg-success" style="width: 90%"></span>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa-brands fa-firefox-browser fs-16 text-warning me-2"></i>
+                                                        <span>Mozila Firefox</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end d-flex align-items-center m-0">
+                                                        <span class="me-3">76%</span>
+                                                        <span class="progress w-100 ht-5">
+                                                            <span class="progress-bar bg-primary" style="width: 76%"></span>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa-brands fa-safari fs-16 text-info me-2"></i>
+                                                        <span>Apple Safari</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end d-flex align-items-center m-0">
+                                                        <span class="me-3">50%</span>
+                                                        <span class="progress w-100 ht-5">
+                                                            <span class="progress-bar bg-warning" style="width: 50%"></span>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa-brands fa-edge fs-16 text-success me-2"></i>
+                                                        <span>Edge Browser</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end d-flex align-items-center m-0">
+                                                        <span class="me-3">20%</span>
+                                                        <span class="progress w-100 ht-5">
+                                                            <span class="progress-bar bg-success" style="width: 20%"></span>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa-brands fa-opera fs-16 text-danger me-2"></i>
+                                                        <span>Opera mini</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end d-flex align-items-center m-0">
+                                                        <span class="me-3">15%</span>
+                                                        <span class="progress w-100 ht-5">
+                                                            <span class="progress-bar bg-danger" style="width: 15%"></span>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa-brands fa-internet-explorer fs-16 text-teal me-2"></i>
+                                                        <span>Internet Explorer</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end d-flex align-items-center m-0">
+                                                        <span class="me-3">12%</span>
+                                                        <span class="progress w-100 ht-5">
+                                                            <span class="progress-bar bg-teal" style="width: 12%"></span>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa-brands fa-octopus-deploy fs-16 text-dark me-2"></i>
+                                                        <span>Others Browser</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="text-end d-flex align-items-center m-0">
+                                                        <span class="me-3">6%</span>
+                                                        <span class="progress w-100 ht-5">
+                                                            <span class="progress-bar bg-dark" style="width: 6%"></span>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <a href="javascript:void(0);" class="card-footer fs-11 fw-bold text-uppercase text-center">Explore Details</a>
+                        </div>
+                    </div>
+        </div> 
     </div>
-
 </div>
 
 {% endblock %}
