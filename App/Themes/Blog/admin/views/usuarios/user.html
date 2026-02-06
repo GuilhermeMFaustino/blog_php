@@ -28,6 +28,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Titulo</th>
+                      <th scope="col">Avatar</th>
                       <th scope="col">Texto</th>
                       <th scope="col">Status</th>
                       <th scope="col">data de cadastro</th>
@@ -40,6 +41,7 @@
                     <tr>
                       <th scope="row">{{post.id}}</th>
                       <td>{{post.name}}</td>
+                      <td>{{ post.avatar }}</td>
                       <td>{{ strLmWords(post.email) }}</td>
 
                       <td>
@@ -49,7 +51,7 @@
                         <i class="bi bi-x-circle text-danger"></i>
                         {% endif %}
                       </td>
-                      <td>{{ post.created_at|date("d/m/Y H:i:s") }}</td>
+                      <td>{{ post.created_at|date("d/m/Y") }}</td>
                       <td><a href="{{url('/admin/usuario/editar/'~post.id)}}"><i
                             class="bi bi-pencil-square text-info"></i></a></td>
                       <td><a href="{{url('/admin/usuario/deletar/'~post.id)}}"><i

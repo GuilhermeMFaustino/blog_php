@@ -6,12 +6,15 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WebPConvert\\' => array($vendorDir . '/rosell-dk/webp-convert/src'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Support\\' => array($baseDir . '/Support'),
     'Source\\' => array($baseDir . '/Source'),
     'Pecee\\' => array($vendorDir . '/pecee/simple-router/src/Pecee'),
+    'ImageMimeTypeGuesser\\' => array($vendorDir . '/rosell-dk/image-mime-type-guesser/src'),
     'Core\\' => array($baseDir . '/Helpers'),
+    'CoffeeCode\\Cropper\\' => array($vendorDir . '/coffeecode/cropper/src'),
     'App\\' => array($baseDir . '/App'),
 );

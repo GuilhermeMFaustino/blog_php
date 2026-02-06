@@ -25,6 +25,7 @@
     "require": {
         "php": ">=8.0",
         "pecee/simple-router": "dev-master",
-        "twig/twig": "3.22"
+        "twig/twig": "3.22",
+        "coffeecode/cropper": "2.0.*"
     }
 }

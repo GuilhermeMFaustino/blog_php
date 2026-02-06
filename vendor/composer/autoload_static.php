@@ -18,6 +18,10 @@ class ComposerStaticInite0f0bd066ea4c2940a61862e7c60096d
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'WebPConvert\\' => 12,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -33,9 +37,14 @@ class ComposerStaticInite0f0bd066ea4c2940a61862e7c60096d
         array (
             'Pecee\\' => 6,
         ),
+        'I' => 
+        array (
+            'ImageMimeTypeGuesser\\' => 21,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
+            'CoffeeCode\\Cropper\\' => 19,
         ),
         'A' => 
         array (
@@ -44,6 +53,10 @@ class ComposerStaticInite0f0bd066ea4c2940a61862e7c60096d
     );
 
     public static $prefixDirsPsr4 = array (
+        'WebPConvert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/webp-convert/src',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -68,9 +81,17 @@ class ComposerStaticInite0f0bd066ea4c2940a61862e7c60096d
         array (
             0 => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee',
         ),
+        'ImageMimeTypeGuesser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rosell-dk/image-mime-type-guesser/src',
+        ),
         'Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Helpers',
+        ),
+        'CoffeeCode\\Cropper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/coffeecode/cropper/src',
         ),
         'App\\' => 
         array (
