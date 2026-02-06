@@ -316,7 +316,7 @@ class Helpers
 
 
 
-    public static function strLmWords(string $texto, $limit = 80): string
+    public static function strLmWords(string $texto, $limit = 90): string
     {
         $pos = strip_tags($texto);
         $posLimpo = strlen($pos);

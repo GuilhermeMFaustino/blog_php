@@ -28,9 +28,11 @@ class AdminCategoriasController extends Controller
 
     public function cadastrar()
     {
+        //$categorias = filter_input_array(INPUT_POST);
         $categorias = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if (isset($categorias)) {
-            (new Category())->save('category', $categorias);
+        var_dump($categorias);
+        /*if (isset($categorias)) {
+            (new Category())->save($categorias);
             Helpers::redirect('admin/categorias/listar');
         }
         $categories = (new Category())->find();
@@ -38,7 +40,7 @@ class AdminCategoriasController extends Controller
             "titulo" => 'Admin - OnlineBlog',
             "categorias" => $categories
         ];
-        echo $this->views->render('categoria/formulario.html', $dados);
+        echo $this->views->render('categoria/formulario.html', $dados);*/
     }
 
 
@@ -61,12 +63,11 @@ class AdminCategoriasController extends Controller
     }
 
     public function deletar(int $id): void
-    {    
-                 
+    {  
+        $id = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         var_dump($id);
-        //$id = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($id)) {
-            (new Category())->delete( $id);
+            (new Category())->delete( "id = $id");
              Helpers::redirect('/admin/categorias/listar');
         }
     }

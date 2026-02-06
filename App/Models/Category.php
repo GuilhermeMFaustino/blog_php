@@ -20,7 +20,7 @@ class Category extends Models
     }
 
 
-    public function save(string $table, array $dados): bool
+   /* public function save(string $table, array $dados): bool
     {
 
         try{
@@ -31,7 +31,7 @@ class Category extends Models
         $query = "INSERT INTO {$table} (title, text, status) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($query);
         return $stmt->execute([$dados['title'], $dados['text'], $dados['status']]);
-    }
+    }*/
 
     /*public function update(string $table, int $id, array $dados): bool
     {

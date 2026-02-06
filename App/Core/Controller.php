@@ -6,7 +6,7 @@ namespace App\Core;
 use App\Core\Views;
 use App\Support\Menssage;
 
-class Controller 
+class Controller
 {
     protected Views $views;
     protected Menssage $message;

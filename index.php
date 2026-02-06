@@ -4,7 +4,7 @@ use Pecee\SimpleRouter\SimpleRouter;
 use App\Support\Helpers;                    
 try {
     require 'vendor/autoload.php';
-
+     
     $requestUri = $_SERVER['REQUEST_URI'];
 
     if (strpos($requestUri, '/App/Themes/') !== false) {
@@ -19,8 +19,8 @@ try {
     SimpleRouter::get("blog/post/{id}", 'WebController@post');
 
 
-    SimpleRouter::post("blog/buscar", 'WebController@buscar');
 
+    SimpleRouter::post("blog/buscar", 'WebController@buscar');
 
 
     /**Admin */
@@ -29,8 +29,10 @@ try {
 
         /**AdminLogin */
          SimpleRouter::match(['get', 'post'], 'blog/admin/login', 'AdminLoginController@login');
+        
 
         SimpleRouter::get('blog/admin/', 'AdminController@index');
+        SimpleRouter::get('blog/admin/logout', 'AdminLoginController@logout');
 
 
         /**Posts */
@@ -39,6 +41,10 @@ try {
 
         /**Categoria*/
         SimpleRouter::get('blog/admin/categorias/listar', 'AdminCategoriasController@listar');
+
+        /**Usuario */
+        SimpleRouter::get('blog/admin/usuario/listar', 'AdminUsuarioController@listar');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/cadastrar', 'AdminUsuarioController@cadastrar');
 
         /**formulario de cadastro post  */
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/cadastrar', 'AdminCategoriasController@cadastrar');
@@ -50,7 +56,7 @@ try {
 
         /**Deletar */
         SimpleRouter::get( 'blog/admin/categorias/deletar/{id}', 'AdminCategoriasController@deletar');
-        SimpleRouter::get( 'blog/admin/posts/deletar/{id}', 'AdminCategoriasController@deletar');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/deletar/{id}', 'AdminPostsController@deletar');
 
     });
     

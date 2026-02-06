@@ -3,7 +3,7 @@
         'name' => 'guilhermemendes/blog',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '0dedd574fd18d25d6cdc18c8ca73dee12fa726b4',
+        'reference' => '4fde9fc5ea1a14536da56fd22df05f89513dfd69',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'guilhermemendes/blog' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '0dedd574fd18d25d6cdc18c8ca73dee12fa726b4',
+            'reference' => '4fde9fc5ea1a14536da56fd22df05f89513dfd69',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -33,11 +33,11 @@
         'symfony/deprecation-contracts' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '63afe740e99a13ba87ec199bb07bbdee937a5b62',
+            'reference' => 'bbd66f9d55454b9b7a66a9cebe77523806a3288a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
             'aliases' => array(
-                0 => '3.6.x-dev',
+                0 => '3.7.x-dev',
             ),
             'dev_requirement' => false,
         ),

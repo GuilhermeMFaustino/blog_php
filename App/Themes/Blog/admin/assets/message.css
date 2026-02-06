@@ -1,0 +1,56 @@
+.message {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #cccccc;
+    margin-bottom: var(--area-box);
+
+    -webkit-border-radius: var(--radius-normal);
+    -moz-border-radius: var(--radius-normal);
+    border-radius: var(--radius-normal);
+}
+
+:root {
+    --color: #fcfcfc;
+
+    --color-blue: #0B5ED7;
+    --color-secunday: #5C636A;
+    --color-ligth: #D3D4D5;
+    
+    --color-success: #157347;
+    --color-error: #fa263c;
+    --color-warning: #FFCA2C;
+    --color-info: #1475F1;
+}
+
+.message.success{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 3px solid var(--color-success);
+    border-radius: 8px;
+    color: var(--color-success);
+}
+
+.message.error {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 3px solid var(--color-error);
+    border-radius: 8px;
+    color: var(--color-error);
+}
+
+.message.warning {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 3px solid var(--color-warning);
+    border-radius: 8px;
+    color: var(--color-warning);
+}
+
+.message.info {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 3px solid var(--color-info);
+    border-radius: 8px;
+    color: var(--color-info);
+}

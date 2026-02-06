@@ -6,7 +6,7 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-header-left">
-      <h5>Categorias</h5>
+      <h5>Posts</h5>
     </div>
   </div>
 
@@ -17,12 +17,12 @@
         <div class="card stretch stretch-full">
           <div class="card-body">
             <div class="card-body">
-              <p>Bem-vindo a pagina de Categoria</p>
+              <p>Bem-vindo a pagina de Posts</p>
 
               <div class="table-responsive">
                 <form
                   action="{% if editarposts.id %}{{url('/admin/posts/editar/'~editarposts.id)}}{% else %}{{url('/admin/posts/cadastrar')}}{% endif %}"
-                  method="post">
+                  method="POST">
 
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Titulo</label>
@@ -31,7 +31,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Texto</label>
-                    <textarea name="text" id="text" class="form-control" rows="3">{{ editarposts.text }}</textarea>
+                    <textarea name="description" id="description" class="form-control" rows="3">{{ editarposts.description }}</textarea>
                   </div>
 
 

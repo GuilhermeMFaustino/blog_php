@@ -45,7 +45,7 @@ class Menssage
     public function warning(string $mensagem): Menssage
     {
         $this->type = 'message warning';
-        $this->icon = '<i class="fa-solid fa-exclamation"></i>';
+        $this->icon = '<i class="fa-sharp fa-solid fa-exclamation"></i>';
         $this->text = $this->filtrar($mensagem);
         return $this;
     }
@@ -53,7 +53,7 @@ class Menssage
     public function info(string $mensagem): Menssage
     {
         $this->type = 'message info';
-        $this->icon = '<i class="fa-solid fa-info"></i>';
+        $this->icon = '<i class="fa-solid fa-circle-info"></i>';
         $this->text = $this->filtrar($mensagem);
         return $this;
     }

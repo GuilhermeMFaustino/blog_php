@@ -31,13 +31,13 @@ class Posts extends Models
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function save(string $table, array $dados): bool
+    /*public function save(string $table, array $dados): bool
     {
 
         $query = "INSERT INTO {$table} (id_categoria, posts, text, status) VALUES (:id_categoria, :posts, :text, :status)";
         $stmt = $this->conn->prepare($query);
         return $stmt->execute($dados);
-    }
+    }*/
 
     /*public function update(string $table, int $id, array $dados): bool
     {
@@ -54,13 +54,5 @@ class Posts extends Models
         return $stmt->execute();
     }*/
 
-    public function total(?string $terms = null): int
-    {
-        $terms = ($terms ? "WHERE {$terms}" : '');
-        $stmt = "SELECT * FROM posts {$terms}";
-        $stmt = $this->conn->prepare($stmt);
-        $stmt->execute();
-        //var_dump($stmt);
-        return $stmt->rowCount();
-    }
+    
 }

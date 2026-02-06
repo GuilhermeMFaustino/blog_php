@@ -4,8 +4,10 @@
 namespace App\Core;
 
 use App\Core\Connect;
+use App\Support\Menssage;
 use PDO;
 use PDOException;
+use stdClass;
 
 abstract class Models
 {
@@ -17,73 +19,92 @@ abstract class Models
     protected string $limit;
     protected string $offset;
     protected string $error;
+    protected $message;
+    protected array $params;
 
+    protected int $id;
+
+    protected object $dados;
     private $columns;
-
     private $query;
     private $cond;
 
     public function __construct()
     {
         $this->conn = Connect::getInstance();
+        $this->message = new Menssage();
     }
 
-    public function getTabela(): mixed
-    {
-        return $this->table;
-    }
+    /**
+     * refatorado
+     * @param mixed $terms
+     * @param mixed $params
+     * @param mixed $columns
+     * @return array
+     */
 
-    public function getColumns(): mixed
+    /*public function find(?string $terms = null, ?string $params = null, string $columns = "*"): ?Models
     {
-        return $this->columns;
-    }
+        if($terms){
+            $this->query = "SELECT {$columns} FROM {$this->table} WHERE {$terms}";
+            parse_str($params, $this->params);
+            return $this;
+        }
+        $this->query = "SELECT {$columns} FROM {$this->table}";
+        return $this;
+    }*/
 
-    public function getCond(): mixed
+    public function find(?string $terms = null, ?string $params = null, ?string $columns = "*")
     {
-        return $this->cond;
-    }
+        $sql = "SELECT {$columns} FROM {$this->table}";
+        if ($params) {
+            $sql .= " WHERE {$params}";
+        }
 
-    public function setTabela($tabela): void
-    {
-        $this->table = $tabela;
-    }
+        $sql .= $this->order ?? '';
+        $sql .= $this->limit ?? '';
+        $sql .= $this->offset ?? '';
 
-    public function setColumns($columns): void
-    {
-        $this->columns = $columns;
-    }
-
-    public function setCond($cond): void
-    {
-        $this->cond = $cond;
-    }
-
-    public function setQuery($query)
-    {
-        $this->query = $query;
-    }
-
-    public function find(string $columns = "*")
-    {
-        $stmt = ("SELECT {$columns} FROM {$this->table}");
-        $stmt .= $this->order ?? '';
-        $stmt .= $this->limit ?? '';
-        $stmt .= $this->offset ?? '';
-        $stmt = $this->conn->prepare($stmt);
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
+
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function save(string $table, array $dados): bool|string|null
-    {
 
+
+    public function result(bool $dados = false)
+    {
+        try {
+            $stmt = Connect::getInstance()->prepare($this->query . $this->order . $this->offset);
+            $stmt->execute($this->params);
+
+            if (!$stmt->rowCount()) {
+                return null;
+            }
+
+            if ($dados) {
+                return $stmt->fetchAll();
+            }
+
+            return $stmt->fetchObject(static::class);
+        } catch (PDOException $ex) {
+            $this->error = $ex;
+        }
+
+        return $this;
+    }
+
+
+
+    public function save(array $dados): bool|string|null
+    {
         try {
             $colums = implode(', ', array_keys($dados));
-            $values = ':' . implode(',:', array_keys($dados));
-            $query = "INSET INTO {$this->table} {$colums} VALUES {$values}";
+            $values = ':' . implode(', :', array_keys($dados));
+            $query = "INSERT INTO {$this->table} ({$colums}) VALUES ({$values})";
             $stmt = Connect::getInstance()->prepare($query);
             $stmt->execute($this->filter($dados));
-
             return Connect::getInstance()->lastInsertId();
         } catch (PDOException $ex) {
             echo $this->error = $ex;
@@ -102,36 +123,25 @@ abstract class Models
             $sql = "UPDATE {$this->table} SET {$set} WHERE {$termos}";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($dados);
-            return $stmt->rowCount();
+            return ($stmt->rowCount() ?? 1);
         } catch (PDOException $ex) {
             $this->error = $ex->getMessage();
             return null;
         }
     }
 
-    public function delete(string $id)
+    public function delete(string $terms): bool|null
     {
         try {
-
-            $this->conn->beginTransaction();
-
-            $stmt = $this->conn->prepare(
-                "DELETE FROM posts WHERE id_categoria = :id"
-            );
-            $stmt->execute(['id' => $id]);
-
-            $stmt = $this->conn->prepare(
-                "DELETE FROM category WHERE id = :id"
-            );
-            $stmt->execute(['id' => $id]);
-
-            $this->conn->commit();
+            $query = "DELETE FROM {$this->table} WHERE {$terms}bcvbcvbc";
+            $stmt = Connect::getInstance()->prepare($query);
+            $stmt->execute();
+            return true;
         } catch (PDOException $ex) {
-            echo $this->error = $ex;
+            $this->error = $ex->getMessage();
+            return false;
         }
     }
-
-
 
     public function findByid(int $id, $terms = null, string $columns = "*"): array|bool|object
     {
@@ -145,6 +155,23 @@ abstract class Models
             return false;
         }
     }
+
+
+    
+   public function findByEmail(string $email, string $terms = "", string $columns = "*"): ?object
+{
+    // Usamos coalescência para evitar erros caso $terms seja null
+    $query = "SELECT {$columns} FROM {$this->table} WHERE email = :email " . ($terms ?: "");
+    
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+    // Retorna o objeto ou null se não encontrar nada
+    $result = $stmt->fetch(PDO::FETCH_OBJ);
+    return $result ?: null;
+}
+
+
 
     public function order(string $order): ?object
     {
@@ -160,36 +187,88 @@ abstract class Models
 
     public function offset(string $offset): ?object
     {
-        $this->offset = " OFFSET BY {$offset}";
+        $this->offset = " OFFSET {$offset}";
         return $this;
+    }
+
+    public function error(): string
+    {
+        return $this->error;
+    }
+
+    public function message(): string
+    {
+        return $this->message;
+    }
+
+    public function dados()
+    {
+        return $this->dados;
+    }
+
+    public function __set($name, $value)
+    {
+        if (empty($this->dados)) {
+            $this->dados = new \stdClass();
+        }
+        $this->dados->$name = $value;
+    }
+
+    public function __isset($name)
+    {
+        return isset($this->dados);
     }
 
     private function filter(array $dados)
     {
-        $filtro = [];
+        $filter = [];
 
         foreach ($dados as $chave => $valor) {
-            $filtro[$chave] = (is_null($valor) ? null : filter_var($valor, FILTER_DEFAULT));
+            $filter[$chave] = (is_null($valor) ? null : filter_var($valor, FILTER_DEFAULT));
         }
+
+        return $filter;
     }
 
-    /*public function result(bool $dados = false)
+
+    protected function create()
     {
-        try {
-            $stmt = Connect::getInstance()->prepare($this->query);
-            $stmt->execute($this->params);
+        $dados = (array) $this->dados;
+        return $dados;
+    }
 
-            if (!$stmt->rowCount()) {
-                return null;
+    public function salvar()
+    {
+        /**Cadastrar */
+        if (empty($this->id)) {
+            $id = $this->save($this->create());
+            if ($this->error) {
+                $this->message->error("Erro de sistema ao tentar Cadastrar os dados");
+                return false;
             }
-
-            if ($dados) {
-                return $stmt->fetchAll();
-            }
-
-            return $stmt->fetch();
-        } catch (PDOException $ex) {
-            $this->erro = $ex;
         }
-    }*/
+        /**
+         * atualiza
+         */
+
+        if (!empty($this->id)) {
+            $id = $this->id;
+            $this->update($this->create(), "id={$id}");
+            if ($this->error) {
+                $this->message->error("Erro de sistema ao tentar Cadastrar os dados");
+                return false;
+            }
+        }
+        $this->dados = $this->findByid($id)->dados();
+        return true;
+    }
+
+    public function total(?string $terms = null): int
+    {
+        $terms = ($terms ? "WHERE {$terms}" : '');
+        $stmt = "SELECT * FROM posts {$terms}";
+        $stmt = $this->conn->prepare($stmt);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }

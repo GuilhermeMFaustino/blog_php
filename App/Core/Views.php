@@ -3,6 +3,7 @@
 
 namespace App\Core;
 
+use App\Controller\Admin\UserController;
 use Twig\Lexer;
 use Twig\TwigFunction;
 use App\Support\Helpers;
@@ -56,6 +57,12 @@ class Views
         $this->twig->addFunction(
             new TwigFunction('flash', function () {
                 return Helpers::flash();
+            })
+        );
+
+        $this->twig->addFunction(
+            new TwigFunction('user', function () {
+                return UserController::user();
             })
         );
 
