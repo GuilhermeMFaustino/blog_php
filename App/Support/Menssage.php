@@ -37,7 +37,7 @@ class Menssage
     public function error(string $mensagem): Menssage
     {
         $this->type = 'message error';
-        $this->icon = '<i class="fa-solid fa-xmark"></i>';
+        $this->icon = '<i class="fa-solid fa-circle-xmark"></i>';
         $this->text = $this->filtrar($mensagem);
         return $this;
     }

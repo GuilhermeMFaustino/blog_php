@@ -6,7 +6,7 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-header-left">
-      <h5>Categorias</h5>
+      <h5>Categorias </h5>
     </div>
   </div>
   <!-- MAIN CONTENT -->
@@ -15,21 +15,19 @@
       <div class="col-lg-12">
         <div class="card stretch stretch-full">
           <div class="card-body">
-            <div class="card-body">
-              <p>Cadastro de Usuarios</p>
               <form action="{% if editarcategoria.id %}{{url('/admin/usuario/editar/'~editarcategoria.id)}}{% else %}{{url('/admin/usuario/cadastrar')}}{% endif %}" method="post" enctype="multipart/form-data">
                 <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
                   <div class="card-body personal-info">
                     <div class="mb-4 d-flex align-items-center justify-content-between">
                       <h5 class="fw-bold mb-0 me-4">
-                        <span class="d-block mb-2">Perfil do Usuario</span>
+                        <span class="d-block mb-2"></span>
                       </h5>
                     </div>
                     <div class="row mb-4 align-items-center">
                       <div class="col-lg-8">
                         <div class="mb-4 mb-md-0 d-flex gap-4 your-brand">
                           <div class="wd-200 ht-200 position-relative overflow-hidden border border-gray-2 rounded">
-                            <img id="preview_image" src="{{ url('App/Themes/Blog/admin/assets/images/avatar/2.png')}}"
+                            <img id="preview_image" src="{{ url('App/Themes/Blog/admin/assets/images/avatar/undefined.png')}}"
                               class="upload-pic img-fluid rounded h-300 w-300" alt="">
                           </div>
                           <input  type="file" name="imagem" id="files" onchange="preview(this);" accept="image/*">
@@ -105,7 +103,6 @@
                   value="{% if editarcategoria.id %}Atualizar{% else %}Cadastrar{% endif %}">
               </form>
             </div>
-          </div>
         </div>
       </div>
     </div>

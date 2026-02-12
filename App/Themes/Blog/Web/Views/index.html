@@ -2,66 +2,187 @@
 
 {% block content %}
 <!-- POSTS -->
-<div class="main-wrapper ">
-	<section class="page-title bg-1">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="block text-center">
-						<span class="text-white">Our blog</span>
-						<h1 class="text-capitalize mb-6 text-lg">Online Blog</h1>
-						<ul class="list-inline">
-							<li class="list-inline-item"><a href="" class="text-white">Home</a></li>
-							<li class="list-inline-item"><span class="text-white">/</span></li>
-							<li class="list-inline-item"><a href="#" class="text-white-50">Our blog</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="section blog-wrap bg-gray">
-		<div class="container">
-			<div class="row">
-				{% for newCategory in category %}
-				<div class="col-lg-4 col-md-5 mb-6">
-					<div class="blog-item">						
-						<img src="{{ url('App/Themes/Blog/Web/assets/' ~ newCategory.posts_imagem) }}" alt=""
-							class="img-fluid rounded">
-						<div class="blog-item-content bg-white p-4">
-							<div class="blog-item-meta bg-gray py-1 px-1 small">
-								<span class="text-muted text-capitalize mr-1"><i class="ti-pencil-alt mr-1"></i>{{
-									newCategory.categoria}}</span>
-								<span class="text-muted text-capitalize mr-1"><i class="ti-comment mr-1"></i>5
-									Comments</span>								
-							</div>
-							
-								<h3 class="mt-3 mb-3"><a href="blog-single.html">{{ newCategory.categoria }}</a></h3>
-							<p class="mb-4">{{ strLmWords(newCategory.description) }}</p>
-							
-							<a href="{{ url('/post/' ~ newCategory.id)}}" class="btn btn-small btn-main btn-round-full">Learn More</a>
+<main class="container main-content">
+      <section class="news-layout">
+        <!-- COLUNA PRINCIPAL -->
+        <div class="news-main">
+          <div class="section-header">
+            <div class="section-title">
+              <div class="icon">📰</div>
+              <div>
+                <h2>Últimas Notícias</h2>
+                <p>
+                  Acompanhe as principais movimentações do futebol pernambucano
+                </p>
+              </div>
+            </div>
+            <a href="#" class="see-all">Ver todas →</a>
+          </div>
 
-							<span class="text-black text-capitalize mr-1"><i class="ti-time mr-1"></i>{{newCategory.created_at }}</span>
-							</br></br>
-						</div>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
+          <div class="news-grid">
+            <!-- CARD GRANDE -->
+            <article class="news-card">
+              <a href="artigo.html"><div class="image">
+                <span class="tag purple">ENTREVISTA</span>
+                <img
+                  src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1200"
+                  alt=""
+                />
+              </div>
+              <div class="content">
+                <h3>
+                  Entrevista: Técnico do Jaboatão United fala sobre projeto de
+                  base
+                </h3>
+                <p>
+                  Técnico Marcos Antônio revela detalhes do projeto que forma
+                  novos talentos
+                </p>
+                <div class="meta">
+                  <span>Carlos Silva</span>
+                  <span>13/01/26</span>
+                  <span>👁 650</span>
+                </div>
+              </div></a>
+            </article>
 
-			<div class="row justify-content-center mt-5">
-				<div class="col-lg-6 text-center">
-					<nav class="navigation pagination d-inline-block">
-						<div class="nav-links">
-							<a class="prev page-numbers" href="#">Prev</a>
-							<span aria-current="page" class="page-numbers current">1</span>
-							<a class="page-numbers" href="#">2</a>
-							<a class="next page-numbers" href="#">Next</a>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</section>
-</div>
+            <article class="news-card">
+              <div class="image">
+                <span class="tag purple">ENTREVISTA</span>
+                <img
+                  src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1200"
+                  alt=""
+                />
+              </div>
+              <div class="content">
+                <h3>
+                  Entrevista: Técnico do Jaboatão United fala sobre projeto de
+                  base
+                </h3>
+                <p>
+                  Técnico Marcos Antônio revela detalhes do projeto que forma
+                  novos talentos
+                </p>
+                <div class="meta">
+                  <span>Carlos Silva</span>
+                  <span>13/01/26</span>
+                  <span>👁 650</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- CARD GRANDE -->
+            <article class="news-card">
+              <div class="image">
+                <span class="tag red">SUBMODALIDADES</span>
+                <img
+                  src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
+                  alt=""
+                />
+              </div>
+              <div class="content">
+                <h3>
+                  Futsal feminino cresce em Pernambuco e ganha liga própria
+                </h3>
+                <p>Primeira liga estadual terá 16 equipes e começa em março</p>
+                <div class="meta">
+                  <span>Roberto Mendes</span>
+                  <span>13/01/26</span>
+                  <span>👁 520</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          <!-- SEGUNDA LINHA -->
+          <div class="news-grid two-cols">
+            <article class="news-card">
+              <div class="image">
+                <span class="tag red">SUBMODALIDADES</span>
+                <img
+                  src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
+                  alt=""
+                />
+              </div>
+              <div class="content">
+                <h3>
+                  Futsal feminino cresce em Pernambuco e ganha liga própria
+                </h3>
+                <p>Primeira liga estadual terá 16 equipes e começa em março</p>
+                <div class="meta">
+                  <span>Roberto Mendes</span>
+                  <span>13/01/26</span>
+                  <span>👁 520</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="news-card">
+              <div class="image">
+                <span class="tag red">SUBMODALIDADES</span>
+                <img
+                  src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
+                  alt=""
+                />
+              </div>
+              <div class="content">
+                <h3>
+                  Futsal feminino cresce em Pernambuco e ganha liga própria
+                </h3>
+                <p>Primeira liga estadual terá 16 equipes e começa em março</p>
+                <div class="meta">
+                  <span>Roberto Mendes</span>
+                  <span>13/01/26</span>
+                  <span>👁 520</span>
+                </div>
+              </div>
+            </article>
+            <article class="news-card">
+              <div class="image">
+                <span class="tag red">SUBMODALIDADES</span>
+                <img
+                  src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
+                  alt=""
+                />
+              </div>
+              <div class="content">
+                <h3>
+                  Futsal feminino cresce em Pernambuco e ganha liga própria
+                </h3>
+                <p>Primeira liga estadual terá 16 equipes e começa em março</p>
+                <div class="meta">
+                  <span>Roberto Mendes</span>
+                  <span>13/01/26</span>
+                  <span>👁 520</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="news-sidebar">
+          <!-- MAIS LIDAS -->
+          <div class="box">
+            <h3>📌 Mais Lidas</h3>
+
+            <div class="side-item">
+              <p>O futebol amador merece mais atenção</p>
+              <span class="date">13 jan</span>
+            </div>
+
+            <div class="side-item">
+              <p>Sport Recife Amador vence clássico e assume liderança</p>
+              <span class="date">13 jan</span>
+            </div>
+          </div>
+
+          <!-- CAMPEONATOS -->
+          <div class="box highlight">
+            <h3>🏆 Campeonatos</h3>
+            <p>Acompanhe as competições do futebol amador de Pernambuco</p>
+            <a href="#" class="btn">Ver competições</a>
+          </div>
+        </aside>
+      </section>
+    </main>
 {% endblock %}
