@@ -19,17 +19,23 @@
           <div class="card-body">
             {{ flash() }}
             <div class="card-body">
-              <a href="{{url('/admin/usuario/cadastrar') }}" class="btn btn-primary" value="Cadastrar Categoria"
-                style="margin-bottom: 10px; max-width: 180px;">Cadastrar usuarios</a>
+              <a
+                href="{{url('/admin/usuario/cadastrar') }}"
+                class="btn btn-primary"
+                value="Cadastrar Categoria"
+                style="margin-bottom: 10px; max-width: 180px"
+                >Cadastrar usuarios</a
+              >
               <p>Bem-vindo a pagina de Posts</p>
               <div class="table-responsive">
                 <table class="table">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Titulo</th>
+                      <th scope="col">{{ imagem }}</th>
                       <th scope="col">Avatar</th>
                       <th scope="col">Texto</th>
+                      <th scope="col">Nivel</th>
                       <th scope="col">Status</th>
                       <th scope="col">data de cadastro</th>
                       <th scope="col">Editar</th>
@@ -37,13 +43,14 @@
                     </tr>
                   </thead>
                   <tbody>
+                                     
                     {% for post in user %}
                     <tr>
                       <th scope="row">{{post.id}}</th>
                       <td>{{post.name}}</td>
-                      <td>{{ post.avatar }}</td>
+                      <td><img src="{{ url( post.thumb) }}" /></td>
                       <td>{{ strLmWords(post.email) }}</td>
-
+                      <td>{{ post.level }}</td>
                       <td>
                         {% if post.status == 1 %}
                         <i class="bi bi-check text-success"></i>
@@ -52,13 +59,18 @@
                         {% endif %}
                       </td>
                       <td>{{ post.created_at|date("d/m/Y") }}</td>
-                      <td><a href="{{url('/admin/usuario/editar/'~post.id)}}"><i
-                            class="bi bi-pencil-square text-info"></i></a></td>
-                      <td><a href="{{url('/admin/usuario/deletar/'~post.id)}}"><i
-                            class="bi bi-trash3 text-danger"></i></a></td>
+                      <td>
+                        <a href="{{url('/admin/usuario/editar/'~post.id)}}"
+                          ><i class="bi bi-pencil-square text-info"></i
+                        ></a>
+                      </td>
+                      <td>
+                        <a href="{{url('/admin/usuario/deletar/'~post.id)}}"
+                          ><i class="bi bi-trash3 text-danger"></i
+                        ></a>
+                      </td>
                     </tr>
                     {% endfor %}
-
                   </tbody>
                 </table>
               </div>

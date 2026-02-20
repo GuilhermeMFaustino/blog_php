@@ -31,9 +31,14 @@
     </script>
   </head>
   <body class="bg-gray-50">
-    {% include 'home.html'%}
-    {% block content %}
 
-    {% endblock %}
-    {% include 'footer.html'%}
+  {% include 'home.html' %}
 
+  {% block slider %}{% endblock %}
+
+  {% block content %}{% endblock %}
+
+  {% include 'footer.html' %}
+
+</body>
+</html>

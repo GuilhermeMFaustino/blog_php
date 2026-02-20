@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 use App\Core\Controller;
 use App\Models\User;
 use App\Support\Helpers;
+use CoffeeCode\Cropper\Cropper;
 
 class AdminUsuarioController extends Controller
 {
@@ -21,16 +22,32 @@ class AdminUsuarioController extends Controller
 
     public function listar()
     {
+        $user = $this->user->order('level  DESC, status ASC')->find();
 
+        $cropper = new Cropper("App/Themes/Blog/admin/assets/images/avatar/cache");
 
+        $base = "App/Themes/Blog/admin/assets/images/avatar";
+        $default = "{$base}/default.png";
+
+        foreach ($user as $u) {
+
+            $path = "{$base}/{$u->avatar}";
+            if (
+                empty($u->avatar) ||
+                !file_exists($path) ||
+                !pathinfo($path, PATHINFO_EXTENSION)
+            ) {
+                $path = $default;
+            }
+            $u->thumb = $cropper->make($path, 40, 40);
+        }
 
         $dados = [
-            "user" => $this->user->order('level  DESC, status ASC')->find(),
+            "user" => $user,
             "total" => [
-                'user' => $this->user->total(),
+                "user" => $this->user->total(),
             ]
         ];
-
         echo $this->views->render('usuarios/user.html', $dados);
     }
 
@@ -38,23 +55,20 @@ class AdminUsuarioController extends Controller
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT) ?? [];
 
-        // 1️⃣ Verifica se veio POST
+        
         if (empty($dados)) {
             echo $this->views->render('usuarios/formulario.html', []);
             return;
         }
-
-        // 2️⃣ Remove espaços
+       
         $dados = array_map('trim', $dados);
-
-        // 3️⃣ Valida campos vazios
+       
         if (in_array("", $dados, true)) {
             $this->message->error("Preencha todos os campos")->flash();
             echo $this->views->render('usuarios/formulario.html', []);
             return;
         }
-
-        // 4️⃣ Verifica e-mail existente
+       
         if (!empty($dados['email'])) {
             $user = $this->user->findByEmail($dados['email']);
 
@@ -68,6 +82,8 @@ class AdminUsuarioController extends Controller
         // Upload imagem
         if (empty($_FILES['imagem']['name'])) {
             $this->message->error("precisa de uma imagem")->flash();
+            Helpers::redirect('/admin/usuario/cadastrar');
+            return;
         }
         if (!empty($_FILES['imagem']['name'])) {
 
@@ -79,10 +95,11 @@ class AdminUsuarioController extends Controller
 
             if (!in_array($ext, $permitidos)) {
                 $this->message->error('Arquivo não permitido')->flash();
+                echo $this->views->render('usuarios/formulario.html', []);
                 return;
             }
 
-            $pasta = 'App/Themes/Blog/Web/assets/images/blog/uploads/';
+            $pasta = 'App/Themes/Blog/admin/assets/images/avatar/';
 
             if (!is_dir($pasta)) {
                 mkdir($pasta, 0777, true);
@@ -90,18 +107,20 @@ class AdminUsuarioController extends Controller
 
             $img  = $_FILES['imagem'];
             $tmp  = $img['tmp_name'];
-            $nome = uniqid() . '-' . $img['name'];
+            $base = pathinfo($img['name'], PATHINFO_FILENAME);
+            $base = Helpers::setUri($base);
+            $nome = uniqid() . '-' . $base . "." . $ext;
             $destino = $pasta . $nome;
 
             if (!move_uploaded_file($tmp, $destino)) {
                 $this->message->error('Falha ao mover o arquivo')->flash();
+                echo $this->views->render('usuarios/formulario.html', []);
                 return;
             }
 
             $dados['avatar'] = $nome;
         }
-
-        // 6️⃣ Salva usuário
+        
         (new User())->save($dados);
 
         Helpers::redirect('/admin/usuario/listar');

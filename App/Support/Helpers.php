@@ -122,30 +122,19 @@ class Helpers
      * @param string $url
      * @return string
      */
-    public static function slug(string $url): string
+    public static function setUri(string $string)
     {
 
-        filter_var(mb_strtolower($url), FILTER_SANITIZE_SPECIAL_CHARS);
-        $formats = 'ÁÀÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßáàâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ@$%&*()_-=+={}[]/?`!;:.,\\\'<>°ºª';
-        $replace = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyrr                                 ';
-
-        $urlnova = strtr($url, $formats, $replace);
-        // tudo minúsculo
-        $urlnova = strtolower($urlnova);
-        $urlnova = strip_tags(trim($url));
-        // converter espaços em traço
-        $urlnova = preg_replace('/\s+/', '-', $urlnova);
-        // remover caracteres inválidos
-        $urlnova = preg_replace('/[^a-z0-9\-]/', '', $urlnova);
-        // substituir múltiplos traços
-        $urlnova = preg_replace('/-+/', '-', $urlnova);
-        //tira os espacos em branco.
-        $urlnova = trim($urlnova, '-');
-
-        return $urlnova;
+        
+        $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ"!@#$%&*()_-+={[}]/?;:.,\\\'<>°ºª';
+		$b = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                 ';	
+		$string = mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8');
+		$string = strtr( $string, mb_convert_encoding($a, 'ISO-8859-1', 'UTF-8'), $b);
+		$string = strip_tags(trim($string));
+		$string = str_replace(" ","-",$string);
+		$string = str_replace(array("-----","----","---","--"),"-",$string);
+		return strtolower(mb_convert_encoding($string, 'ISO-8859-1', 'UTF-8'));
     }
-
-
 
     /**
      * Summary of validaCPF
