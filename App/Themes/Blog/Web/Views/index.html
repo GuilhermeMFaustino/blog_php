@@ -15,136 +15,33 @@
         <a href="#" class="see-all">Ver todas →</a>
       </div>
 
-      <div class="news-grid">
-        {% for newCategory in category %}
+        <div class="news-grid">
+        {% for newPost in posts %}
         <!-- CARD GRANDE -->
         <article class="news-card">
-          <a href="{{ url('/post/' ~ newCategory.id)}}"><div class="image">
-              <span class="tag purple">ENTREVISTA</span>
+          <a href="{{ url('/post/' ~ newPost.id)}}"><div class="image">
               <img
-                src="{{ url('App/Themes/Blog/Web/assets/' ~ newCategory.posts_imagem) }}"
+                src="{{ url( newPost.thumb ) }} "
                 alt=""
               />
             </div>
             <div class="content">
               <h3>
-                Entrevista: {{ strLmWords(newCategory.description) }}
+                Entrevista: {{ strLmWords(newPost.posts) }}
               </h3>
               <p>
-                Técnico Marcos Antônio revela detalhes do projeto que forma
-                novos talentos
+               Entrevista: {{ strLmWords(newPost.description, 60) }}
               </p>
               <div class="meta">
                 <span>Igor</span>
-                <span>{{newCategory.created_at }}</span>
+                <span>{{newPost.created_at }}</span>
                 <span>👁 650</span>
               </div>
             </div></a
           >
         </article>
         {% endfor %}
-        <article class="news-card">
-          <div class="image">
-            <span class="tag purple">ENTREVISTA</span>
-            <img
-              src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=1200"
-              alt=""
-            />
-          </div>
-          <div class="content">
-            <h3>
-              Entrevista: Técnico do Jaboatão United fala sobre projeto de base
-            </h3>
-            <p>
-              Técnico Marcos Antônio revela detalhes do projeto que forma novos
-              talentos
-            </p>
-            <div class="meta">
-              <span>Carlos Silva</span>
-              <span>13/01/26</span>
-              <span>👁 650</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- CARD GRANDE -->
-        <article class="news-card">
-          <div class="image">
-            <span class="tag red">SUBMODALIDADES</span>
-            <img
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
-              alt=""
-            />
-          </div>
-          <div class="content">
-            <h3>Futsal feminino cresce em Pernambuco e ganha liga própria</h3>
-            <p>Primeira liga estadual terá 16 equipes e começa em março</p>
-            <div class="meta">
-              <span>Roberto Mendes</span>
-              <span>13/01/26</span>
-              <span>👁 520</span>
-            </div>
-          </div>
-        </article>
-      </div>
-      <!-- SEGUNDA LINHA -->
-      <div class="news-grid two-cols">
-        <article class="news-card">
-          <div class="image">
-            <span class="tag red">SUBMODALIDADES</span>
-            <img
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
-              alt=""
-            />
-          </div>
-          <div class="content">
-            <h3>Futsal feminino cresce em Pernambuco e ganha liga própria</h3>
-            <p>Primeira liga estadual terá 16 equipes e começa em março</p>
-            <div class="meta">
-              <span>Roberto Mendes</span>
-              <span>13/01/26</span>
-              <span>👁 520</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="news-card">
-          <div class="image">
-            <span class="tag red">SUBMODALIDADES</span>
-            <img
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
-              alt=""
-            />
-          </div>
-          <div class="content">
-            <h3>Futsal feminino cresce em Pernambuco e ganha liga própria</h3>
-            <p>Primeira liga estadual terá 16 equipes e começa em março</p>
-            <div class="meta">
-              <span>Roberto Mendes</span>
-              <span>13/01/26</span>
-              <span>👁 520</span>
-            </div>
-          </div>
-        </article>
-        <article class="news-card">
-          <div class="image">
-            <span class="tag red">SUBMODALIDADES</span>
-            <img
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200"
-              alt=""
-            />
-          </div>
-          <div class="content">
-            <h3>Futsal feminino cresce em Pernambuco e ganha liga própria</h3>
-            <p>Primeira liga estadual terá 16 equipes e começa em março</p>
-            <div class="meta">
-              <span>Roberto Mendes</span>
-              <span>13/01/26</span>
-              <span>👁 520</span>
-            </div>
-          </div>
-        </article>
-      </div>
+    </div>
     </div>
 
     <!-- SIDEBAR -->

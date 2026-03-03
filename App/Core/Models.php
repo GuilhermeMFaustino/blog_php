@@ -54,13 +54,13 @@ abstract class Models
         return $this;
     }*/
 
-    public function find(?string $terms = null, ?string $params = null, ?string $columns = "*")
+    public function find(?string $params = null, ?string $columns = "*")
     {
         $sql = "SELECT {$columns} FROM {$this->table}";
+
         if ($params) {
             $sql .= " WHERE {$params}";
         }
-
         $sql .= $this->order ?? '';
         $sql .= $this->limit ?? '';
         $sql .= $this->offset ?? '';

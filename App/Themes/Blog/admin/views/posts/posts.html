@@ -30,6 +30,7 @@
                       <th scope="col">Titulo</th>
                       <th scope="col">Texto</th>
                       <th scope="col">Status</th>
+                      <th scope="col">Imagem</th>
                       <th scope="col">data de cadastro</th>
                       <th scope="col">Editar</th>
                       <th scope="col">Deletar</th>
@@ -39,8 +40,8 @@
                     {% for post in posts %}
                     <tr>
                       <th scope="row">{{post.id}}</th>
-                      <td>{{post.posts}}</td>
-                      <td>{{ strLmWords(post.description) }}</td>
+                      <td>{{ strLmWords(post.posts, 15) }}</td>
+                      <td>{{ strLmWords(post.description, 25) }}</td>                     
 
                       <td>
                         {% if post.status == 1 %}
@@ -49,6 +50,7 @@
                         <i class="bi bi-x-circle text-danger"></i>
                         {% endif %}
                       </td>
+                       <td><img src="{{ url( post.thumb) }}" /></td>
                       <td>{{ post.created_at|date("d/m/Y H:i:s") }}</td>
                       <td><a href="{{url('/admin/posts/editar/'~post.id)}}"><i
                             class="bi bi-pencil-square text-info"></i></a></td>

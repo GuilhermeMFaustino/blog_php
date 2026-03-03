@@ -21,17 +21,47 @@
 
               <div class="table-responsive">
                 <form
-                  action="{% if editarposts.id %}{{url('/admin/posts/editar/'~editarposts.id)}}{% else %}{{url('/admin/posts/cadastrar')}}{% endif %}"
-                  method="POST">
+                  action="{% if editarPosts.id %}{{url('/admin/post/update/'~editarPosts.id)}}{% else %}{{url('/admin/posts/cadastrar')}}{% endif %}"
+                  method="POST" enctype="multipart/form-data">
+
+                  <div class="mb-4 mb-md-0 d-flex gap-4 your-brand">
+                        <div class="wd-250 ht-250 position-relative overflow-hidden border border-gray-2 rounded">                          
+                          <img id="preview_image" src="{{ editarPosts.posts_imagem ? url('App/Themes/Blog/admin/assets/images/posts/'~editarPosts.posts_imagem) : url('App/Themes/Blog/admin/assets/images/posts/undefined.png')
+                          }}" class="upload-pic img-fluid rounded h-250 w-450" alt="">
+                        </div>
+                        <input type="file" name="imagem" id="files" onchange="preview(this);" accept="image/*">
+                        <script>
+                          function preview(input) {
+                            if (input.files && input.files[0]) {
+                              var reader = new FileReader();
+                              reader.onload = function (e) {
+                                $('#preview_image')
+                                  .attr('src', e.target.result)
+                                  .width(80)
+                                  .height(80);
+                              };
+                              reader.readAsDataURL(input.files[0]);
+                            }
+                          }
+                        </script>
+                        <div class="d-flex flex-column gap-1">
+                          <div class="fs-11 text-gray-500 mt-2"># Upload your prifile</div>
+                          <div class="fs-11 text-gray-500"># Avatar size 250x250</div>
+                          <div class="fs-11 text-gray-500"># Max upload size 8mb</div>
+                          <div class="fs-11 text-gray-500"># Allowed file types: png, jpg, jpeg</div>
+                        </div>
+                      </div>
+
+
 
                   <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Titulo</label>
                     <input type="text" name="posts" id="titulo" class="form-control" placeholder="Titulo"
-                      value="{{ editarposts.posts }}">
+                      value="{{ editarPosts.posts }}">
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Texto</label>
-                    <textarea name="description" id="description" class="form-control" rows="3">{{ editarposts.description }}</textarea>
+                    <textarea name="description" id="description" class="form-control" rows="3">{{ editarPosts.description }}</textarea>
                   </div>
 
 
@@ -60,7 +90,7 @@
                   </div>
 
                   <input type="submit" class="btn btn-primary"
-                    value="{% if editarposts.id %}Atualizar{% else %}Cadastrar{% endif %}">
+                    value="{% if editarPosts.id %}Atualizar{% else %}Cadastrar{% endif %}">
                 </form>
               </div>
             </div>

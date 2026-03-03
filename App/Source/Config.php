@@ -12,6 +12,7 @@ define('SERVIDOR_PRODUCAO', 'localhost');
 
 define("URL_DESENVOLVIMENTO", "https://www.localhost/blog");
 define("URL_PRODUCAO", "https://www.localhost/blog");
+define("ROOT", dirname(__DIR__, 2));
 
 /**
  * Config do Banco de Dados

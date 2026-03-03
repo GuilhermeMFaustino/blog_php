@@ -6,7 +6,7 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-header-left">
-      <h5>Categorias </h5>
+      <h5>Usuario</h5>
     </div>
   </div>
   <!-- MAIN CONTENT -->
@@ -15,94 +15,103 @@
       <div class="col-lg-12">
         <div class="card stretch stretch-full">
           <div class="card-body">
-              <form action="{% if editarcategoria.id %}{{url('/admin/usuario/editar/'~editarcategoria.id)}}{% else %}{{url('/admin/usuario/cadastrar')}}{% endif %}" method="post" enctype="multipart/form-data">
-                <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
-                  <div class="card-body personal-info">
-                    <div class="mb-4 d-flex align-items-center justify-content-between">
-                      <h5 class="fw-bold mb-0 me-4">
-                        <span class="d-block mb-2"></span>
-                      </h5>
-                    </div>
-                    <div class="row mb-4 align-items-center">
-                      <div class="col-lg-8">
-                        <div class="mb-4 mb-md-0 d-flex gap-4 your-brand">
-                          <div class="wd-200 ht-200 position-relative overflow-hidden border border-gray-2 rounded">
-                            <img id="preview_image" src="{{ url('App/Themes/Blog/admin/assets/images/avatar/undefined.png')}}"
-                              class="upload-pic img-fluid rounded h-300 w-300" alt="">
-                          </div>
-                          <input  type="file" name="imagem" id="files" onchange="preview(this);" accept="image/*">
-                          <script>
-                            function preview(input) {
-                              if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function (e) {
-                                  $('#preview_image')
-                                    .attr('src', e.target.result)
-                                    .width(250)
-                                    .height(250);
-                                };
-                                reader.readAsDataURL(input.files[0]);
-                              }
+            <form
+              action="{% if userEdite.id %}{{url('/admin/usuario/update/'~userEdite.id)}}{% else %}{{url('/admin/usuario/cadastrar')}}{% endif %}"
+              method="POST" enctype="multipart/form-data">
+              <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
+                <div class="card-body personal-info">
+                  <div class="mb-4 d-flex align-items-center justify-content-between">
+                    <h5 class="fw-bold mb-0 me-4">
+                      <span class="d-block mb-2"></span>
+                    </h5>
+                  </div>
+                  <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8">
+                      <div class="mb-4 mb-md-0 d-flex gap-4 your-brand">
+                        <div class="wd-200 ht-200 position-relative overflow-hidden border border-gray-2 rounded">
+                          <img id="preview_image" src="{{ userEdite.avatar ? url('App/Themes/Blog/admin/assets/images/avatar/'~userEdite.avatar) : url('App/Themes/Blog/admin/assets/images/avatar/undefined.png')
+                          }}" class="upload-pic img-fluid rounded h-300 w-300" alt="">
+                        </div>
+                        <input type="file" name="imagem" id="files" onchange="preview(this);" accept="image/*">
+                        <script>
+                          function preview(input) {
+                            if (input.files && input.files[0]) {
+                              var reader = new FileReader();
+                              reader.onload = function (e) {
+                                $('#preview_image')
+                                  .attr('src', e.target.result)
+                                  .width(250)
+                                  .height(250);
+                              };
+                              reader.readAsDataURL(input.files[0]);
                             }
-                          </script>
-                          <div class="d-flex flex-column gap-1">
-                            <div class="fs-11 text-gray-500 mt-2"># Upload your prifile</div>
-                            <div class="fs-11 text-gray-500"># Avatar size 250x250</div>
-                            <div class="fs-11 text-gray-500"># Max upload size 8mb</div>
-                            <div class="fs-11 text-gray-500"># Allowed file types: png, jpg, jpeg</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-4 align-items-center">
-                      <div class="col-lg-8">
-                        <div class="input-group">
-                          <div class="input-group-text"><i class="feather-user"></i></div>
-                          <input type="text" name="name" class="form-control" id="fullnameInput" placeholder="Nome">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-4 align-items-center">
-                      <div class="col-lg-8">
-                        <div class="input-group">
-                          <div class="input-group-text"><i class="feather-mail"></i></div>
-                          <input type="text" name="email" class="form-control" id="mailInput" placeholder="Email">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-4 align-items-center">
-                      <div class="col-lg-8">
-                        <div class="input-group">
-                          <div class="input-group-text"><i class="feather feather-lock"></i></div>
-                          <input type="text" name="password" class="form-control" id="phoneInput" placeholder="Senha">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-4 align-items-center">
-                      <div class="col-lg-8">
-                        <div class="input-group">
-                          <div class="input-group-text"><i class="feather feather-key"></i></div>
-                          <input type="text" name="level" class="form-control" id="companyInput" placeholder="Level">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mb-4 align-items-center">
-                      <div class="col-lg-8">
-                        <div class="input-group">
-                          <div class="input-group-text"><i class="feather feather-check-circle"></i></div>
-                          <input type="text" name="status" class="form-control" id="designationInput"
-                            placeholder="Status">
+                          }
+                        </script>
+                        <div class="d-flex flex-column gap-1">
+                          <div class="fs-11 text-gray-500 mt-2"># Upload your prifile</div>
+                          <div class="fs-11 text-gray-500"># Avatar size 250x250</div>
+                          <div class="fs-11 text-gray-500"># Max upload size 8mb</div>
+                          <div class="fs-11 text-gray-500"># Allowed file types: png, jpg, jpeg</div>
                         </div>
                       </div>
                     </div>
                   </div>
-
+                  <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8">
+                      <div class="input-group">
+                        <div class="input-group-text"><i class="feather-user"></i></div>
+                        <input type="text" name="name" class="form-control" id="fullnameInput"
+                          value="{{ userEdite.name }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8">
+                      <div class="input-group">
+                        <div class="input-group-text"><i class="feather-mail"></i></div>
+                        <input type="text" name="email" class="form-control" id="mailInput"
+                          value="{{ userEdite.email }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8">
+                      <div class="input-group">
+                        <div class="input-group-text"><i class="feather feather-lock"></i></div>
+                        <input type="password" name="password" class="form-control" id="phoneInput"
+                          value="{{ userEdite.password }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8">
+                      <div class="input-group">
+                        <div class="input-group-text"><i class="feather feather-key"></i></div>
+                        <input type="text" name="level" class="form-control" id="companyInput"
+                          value="{{ userEdite.level }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-4 align-items-center ">
+                    <div class="col-lg-8">
+                      <select class="form-control" data-select2-selector="status" name="status">
+                        <option value="1" {% if userEdite.status == 1 %}selected{% endif %} data-bg="bg-success"
+                          class="wd-7 ht-7 rounded-circle bg-success">
+                          Active
+                        </option>
+                        <option value="0" {% if userEdite.status == 0 %}selected{% endif %} data-bg="bg-warning"
+                          class="wd-7 ht-7 rounded-circle bg-success">
+                          Inactive
+                        </option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <input type="submit" class="btn btn-primary"
-                  value="{% if editarcategoria.id %}Atualizar{% else %}Cadastrar{% endif %}">
-              </form>
-            </div>
+              </div>
+              <input type="submit" class="btn btn-primary"
+                value="{% if userEdite.id %}Atualizar{% else %}Cadastrar{% endif %}">
+            </form>
+          </div>
         </div>
       </div>
     </div>

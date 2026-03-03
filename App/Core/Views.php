@@ -49,8 +49,8 @@ class Views
         ); 
         
         $this->twig->addFunction(
-            new TwigFunction('strLmWords', function (?string $strLmWords = null) {
-                return Helpers::strLmWords($strLmWords);
+            new TwigFunction('strLmWords', function ($texto, ?string $strLmWords = null) {
+                return Helpers::strLmWords($texto, $strLmWords);
             })
         );
 

@@ -112,7 +112,7 @@ class Helpers
         } else {
             $base = URL_PRODUCAO;
         }
-        return $base . "/" . ltrim($url, "/");
+        return $base . "/" . ltrim($url ?? '', "/");
     }
 
 
@@ -305,7 +305,7 @@ class Helpers
 
 
 
-    public static function strLmWords(string $texto, $limit = 90): string
+    public static function strLmWords(string $texto, $limit = null): string
     {
         $pos = strip_tags($texto);
         $posLimpo = strlen($pos);

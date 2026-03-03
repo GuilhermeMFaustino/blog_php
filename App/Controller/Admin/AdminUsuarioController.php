@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 
 use App\Core\Controller;
+use App\Core\Upload;
 use App\Models\User;
 use App\Support\Helpers;
 use CoffeeCode\Cropper\Cropper;
@@ -27,7 +28,7 @@ class AdminUsuarioController extends Controller
         $cropper = new Cropper("App/Themes/Blog/admin/assets/images/avatar/cache");
 
         $base = "App/Themes/Blog/admin/assets/images/avatar";
-        $default = "{$base}/default.png";
+        $default = "{$base}/undefined.png";
 
         foreach ($user as $u) {
 
@@ -48,6 +49,7 @@ class AdminUsuarioController extends Controller
                 "user" => $this->user->total(),
             ]
         ];
+
         echo $this->views->render('usuarios/user.html', $dados);
     }
 
@@ -55,20 +57,20 @@ class AdminUsuarioController extends Controller
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT) ?? [];
 
-        
+
         if (empty($dados)) {
             echo $this->views->render('usuarios/formulario.html', []);
             return;
         }
-       
+
         $dados = array_map('trim', $dados);
-       
+
         if (in_array("", $dados, true)) {
             $this->message->error("Preencha todos os campos")->flash();
             echo $this->views->render('usuarios/formulario.html', []);
             return;
         }
-       
+
         if (!empty($dados['email'])) {
             $user = $this->user->findByEmail($dados['email']);
 
@@ -120,9 +122,47 @@ class AdminUsuarioController extends Controller
 
             $dados['avatar'] = $nome;
         }
-        
+
         (new User())->save($dados);
 
         Helpers::redirect('/admin/usuario/listar');
+    }
+
+
+    public function editar($id)
+    {
+        $user = (new User())->findByid($id);
+        $dados = [
+            "userEdite" => $user
+        ];
+        echo $this->views->render('usuarios/formulario.html', $dados);
+    }
+
+
+    public function update($id)
+    {
+        $update = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if ($update) {
+            $user = (new User())->findByid("$id");
+            $c = new Cropper('App/Themes/Blog/admin/assets/images/avatar/cache');
+            $a = new Cropper('App/Themes/Blog/admin/assets/images/avatar');
+            //flush by filename
+            $c->flush("App/Themes/Blog/admin/assets/images/avatar/{$user->avatar}");
+            $a->flush("App/Themes/Blog/admin/assets/images/{$user->avatar}");
+
+            $c->flush();
+            $a->flush();
+           
+            $upload = new Upload();
+            $img = $upload->uploadImage($_FILES, "avatar");
+            $update['avatar'] = $img;
+            (new User)->update($update, "id = $id");
+            $this->message->success("Usuario atualizado com sucesso")->flash();
+            Helpers::redirect('/admin/usuario/listar');
+        } else {
+            $this->message->success("erro ao atualizar usuario")->flash();
+            Helpers::redirect('/admin/usuario/editar/{$id}');
+        }
+        return;
     }
 }

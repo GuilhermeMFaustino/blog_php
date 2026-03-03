@@ -45,14 +45,21 @@ try {
         /**Usuario */
         SimpleRouter::get('blog/admin/usuario/listar', 'AdminUsuarioController@listar');
         SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/cadastrar', 'AdminUsuarioController@cadastrar');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/editar/{id}', 'AdminUsuarioController@editar');
+        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/update/{id}', 'AdminUsuarioController@update');
 
         /**formulario de cadastro post  */
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/cadastrar', 'AdminCategoriasController@cadastrar');
         SimpleRouter::match(['get', 'post'], 'blog/admin/posts/cadastrar', 'AdminPostsController@cadastrar');
 
-        /**editar posts e categoria*/
+        
         SimpleRouter::match(['get', 'post'], 'blog/admin/posts/editar/{id}', 'AdminPostsController@editar');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/update/{id}', 'AdminPostsController@update');
+
+        /**editar posts e categoria*/
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/editar/{id}', 'AdminCategoriasController@editar');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/update/{id}', 'AdminCategoriasController@editar');
 
         /**Deletar */
         SimpleRouter::get( 'blog/admin/categorias/deletar/{id}', 'AdminCategoriasController@deletar');
