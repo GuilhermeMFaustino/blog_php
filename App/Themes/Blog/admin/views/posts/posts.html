@@ -50,7 +50,7 @@
                         <i class="bi bi-x-circle text-danger"></i>
                         {% endif %}
                       </td>
-                       <td><img src="{{ url( post.thumb) }}" /></td>
+                       <td><img src="{{ url( post.thumb ) }}" /></td>
                       <td>{{ post.created_at|date("d/m/Y H:i:s") }}</td>
                       <td><a href="{{url('/admin/posts/editar/'~post.id)}}"><i
                             class="bi bi-pencil-square text-info"></i></a></td>

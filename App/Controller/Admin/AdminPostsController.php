@@ -24,14 +24,14 @@ class AdminPostsController extends Controller
     {
         $posts = $this->posts->order('status ASC')->find();
 
-         $cropper = new Cropper("App/Themes/Blog/admin/assets/images/posts/cache");
+        $cropper = new Cropper("App/Themes/Blog/admin/assets/images/posts/cache");
 
-         $base = "App/Themes/Blog/admin/assets/images/posts";
+        $base = "App/Themes/Blog/admin/assets/images/posts";
 
-         $default = "{$base}/undefined.png";
+        $default = "{$base}/undefined.png";
 
 
-         foreach ($posts as $u) {
+        foreach ($posts as $u) {
 
             $path = "{$base}/{$u->posts_imagem}";
             if (
@@ -41,15 +41,15 @@ class AdminPostsController extends Controller
             ) {
                 $path = $default;
             }
-            $u->thumb = $cropper->make($path, 40, 40);            
+            $u->thumb = $cropper->make($path, 40, 40);
         }
 
-        
+
         $dados = [
             "posts" => $posts,
-            "titulo" => 'Admin - OnlineBlog'            
+            "titulo" => 'Admin - OnlineBlog'
         ];
-           
+
         echo $this->views->render('posts/posts.html', $dados);
     }
 
@@ -61,7 +61,9 @@ class AdminPostsController extends Controller
             $this->message->error('favor preencher os campos')->flash();
             $upload = new Upload();
             $img = $upload->uploadImage($_FILES, "posts");
-            $dados['posts_imagem'] = $img; 
+
+            $dados['posts_imagem'] = $img;
+
             (new Posts())->save($dados);
             $this->message->success('Post Cadastrado com sucesso')->flash();
             Helpers::redirect('/admin/posts/listar');
@@ -85,7 +87,7 @@ class AdminPostsController extends Controller
         $post = (new Posts())->findByid($id);
         $categorias = (new Category())->find();
         //var_dump($post);
-       //die();
+        //die();
         $dados = [
             "titulo" => 'Admin - OnlineBlog',
             "editarPosts" => $post,
@@ -97,16 +99,40 @@ class AdminPostsController extends Controller
 
     public function update(int $id)
     {
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        var_dump($_FILES, $dados);
-        var_dump($_FILES, $id);
-        die();
+        $update = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        /*if (isset($dados)) {
-            (new Posts())->update($dados, "id = {$id}");
+        if ($update) {
+            $posts = (new Posts())->findByid($id);
+
+            if (!$posts) {
+                $this->message->error("Usuario nao encontrado")->flash();
+                Helpers::redirect("/admin/posts/listar");
+                return;
+            }
+
+            if (!empty($_FILES['imagem']['name'])) {
+
+                $imagemUpload = $_FILES['imagem']['name'];
+                $pathoriiginal = "App/Themes/Blog/admin/assets/images/posts/{$posts->posts_imagem}";
+                if (file_exists($pathoriiginal)) {
+                    unlink($pathoriiginal);
+                }
+                $cropper = new Cropper("App/Themes/Blog/admin/assets/images/posts/cache");
+                $cropper->flush($posts->posts_imagem);
+                $cropper->make("App/Themes/Blog/admin/assets/images/posts/{$imagemUpload}", 40, 40);
+                $upload = new Upload();
+                $img = $upload->uploadImage($_FILES, "posts");
+                $update['posts_imagem'] = $img;
+            }
+
+            (new Posts())->update($update, "id = {$id}");
+            $this->message->success("Post atualizado com sucesso")->flash();
             Helpers::redirect('/admin/posts/listar');
-        }*/
-        
+            return;
+        }
+
+        $this->message->success("erro ao atualizar Post")->flash();
+        Helpers::redirect('/admin/posts/editar/{$id}');
     }
 
 

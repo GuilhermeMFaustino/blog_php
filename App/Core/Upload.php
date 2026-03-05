@@ -27,11 +27,11 @@ class Upload
                 pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION)
             );
 
-            $permitidos = ['jpg', 'jpeg', 'png', 'webp'];
+            $permitidos = ['jpg', 'jpeg', 'png'];
 
             if (!in_array($ext, $permitidos)) {
                 $this->message->error("tipo de arquvivo nao e permitido")->flash();
-                return null;
+                return null;            
             }
 
             $pasta = "App/Themes/Blog/admin/assets/images/{$diretorio}/";

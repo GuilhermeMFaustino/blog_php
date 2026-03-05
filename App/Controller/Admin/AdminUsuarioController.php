@@ -142,27 +142,68 @@ class AdminUsuarioController extends Controller
     public function update($id)
     {
         $update = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        if ($update) {
+            $user = (new User())->findByid($id);
+
+            if (!$user) {
+                $this->message->error("Usuario nao encontrado")->flash();
+                Helpers::redirect("/admin/usuario/listar");
+                return;
+            }
+
+            if (!empty($_FILES['imagem']['name'])) {
+
+                $imagemUpload = $_FILES['imagem']['name'];
+                $pathoriiginal = "App/Themes/Blog/admin/assets/images/avatar/{$user->avatar}";
+                if (file_exists($pathoriiginal)) {
+                    unlink($pathoriiginal);
+                }
+                $cropper = new Cropper("App/Themes/Blog/admin/assets/images/avatar/cache");
+                $cropper->flush($user->avatar);
+                $cropper->make("App/Themes/Blog/admin/assets/images/avatar/{$imagemUpload}", 40, 40);
+                $upload = new Upload();
+                $img = $upload->uploadImage($_FILES, "avatar");
+                $update['avatar'] = $img;
+            }
+
+            (new User())->update($update, "id = {$id}");
+            $this->message->success("Usuario atualizado com sucesso")->flash();
+            Helpers::redirect('/admin/usuario/listar');
+            return;
+        }
+
+        $this->message->success("erro ao atualizar usuario")->flash();
+        Helpers::redirect('/admin/usuario/editar/{$id}');
+    }
+    /*
+        $update = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if ($update) {
             $user = (new User())->findByid("$id");
-            $c = new Cropper('App/Themes/Blog/admin/assets/images/avatar/cache');
-            $a = new Cropper('App/Themes/Blog/admin/assets/images/avatar');
-            //flush by filename
-            $c->flush("App/Themes/Blog/admin/assets/images/avatar/{$user->avatar}");
-            $a->flush("App/Themes/Blog/admin/assets/images/{$user->avatar}");
 
-            $c->flush();
-            $a->flush();
-           
+            if(!$user){
+                $this->message->error("Usuario não encontrado.")->flash();
+                Helpers::redirect("/admin/usuario/listar");
+            }
+
+            $imagemUpload = $_FILES['imagem']['name'];
+            $c = new Cropper('App/Themes/Blog/admin/assets/images/avatar/cache');            
+            $c->make("App/Themes/Blog/admin/assets/images/avatar/{$imagemUpload}", 40, 40);
+            //flush by filename
+            $c->flush("App/Themes/Blog/admin/assets/images/avatar/cache/{$user->avatar}");
+            $pathOriginal = "App/Themes/Blog/admin/assets/images/avatar/{$user->avatar}";
+            if (file_exists($pathOriginal)) {
+                unlink($pathOriginal);
+            }
             $upload = new Upload();
             $img = $upload->uploadImage($_FILES, "avatar");
             $update['avatar'] = $img;
-            (new User)->update($update, "id = $id");
+            $teste = (new User)->update($update, "id = $id");
             $this->message->success("Usuario atualizado com sucesso")->flash();
             Helpers::redirect('/admin/usuario/listar');
         } else {
             $this->message->success("erro ao atualizar usuario")->flash();
             Helpers::redirect('/admin/usuario/editar/{$id}');
         }
-        return;
-    }
+        return;*/
 }

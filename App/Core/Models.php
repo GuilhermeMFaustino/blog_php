@@ -133,7 +133,7 @@ abstract class Models
     public function delete(string $terms): bool|null
     {
         try {
-            $query = "DELETE FROM {$this->table} WHERE {$terms}bcvbcvbc";
+            $query = "DELETE FROM {$this->table} WHERE {$terms}";
             $stmt = Connect::getInstance()->prepare($query);
             $stmt->execute();
             return true;
