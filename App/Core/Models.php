@@ -54,22 +54,29 @@ abstract class Models
         return $this;
     }*/
 
-    public function find(?string $params = null, ?string $columns = "*")
-    {
-        $sql = "SELECT {$columns} FROM {$this->table}";
+    public function find(?string $params = null, ?string $bind = null, ?string $columns = "*")
+{
+    $sql = "SELECT {$columns} FROM {$this->table}";
 
-        if ($params) {
-            $sql .= " WHERE {$params}";
-        }
-        $sql .= $this->order ?? '';
-        $sql .= $this->limit ?? '';
-        $sql .= $this->offset ?? '';
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    if ($params) {
+        $sql .= " WHERE {$params}";
     }
+
+    $sql .= $this->order ?? '';
+    $sql .= $this->limit ?? '';
+    $sql .= $this->offset ?? '';
+
+    $stmt = $this->conn->prepare($sql);
+
+    if ($bind) {
+        parse_str($bind, $params);
+        $stmt->execute($params);
+    } else {
+        $stmt->execute();
+    }
+
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
 
 
 

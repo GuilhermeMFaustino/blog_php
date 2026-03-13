@@ -28,42 +28,43 @@ try {
     SimpleRouter::group(['namespace' => 'Admin'], function(){
 
         /**AdminLogin */
-         SimpleRouter::match(['get', 'post'], 'blog/admin/login', 'AdminLoginController@login');
-        
+         SimpleRouter::match(['get', 'post'], 'blog/admin/login', 'AdminLoginController@login');        
 
         SimpleRouter::get('blog/admin/', 'AdminController@index');
         SimpleRouter::get('blog/admin/logout', 'AdminLoginController@logout');
 
 
-        /**Posts */
-        SimpleRouter::get('blog/admin/posts/listar', 'AdminPostsController@listar');
-        
-
-        /**Categoria*/
-        SimpleRouter::get('blog/admin/categorias/listar', 'AdminCategoriasController@listar');
-
         /**Usuario */
         SimpleRouter::get('blog/admin/usuario/listar', 'AdminUsuarioController@listar');
         SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/cadastrar', 'AdminUsuarioController@cadastrar');
         SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/editar/{id}', 'AdminUsuarioController@editar');
-        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/deletar/{id}', 'AdminUsuarioController@deletar');  
         SimpleRouter::match(['get', 'post'], 'blog/admin/usuario/update/{id}', 'AdminUsuarioController@update');
 
-        /**formulario de cadastro post  */
+
+        /**Videos*/
+       SimpleRouter::match(['get', 'post'], 'blog/admin/videos/listar', 'AdminVideosController@listar');
+       SimpleRouter::match(['get', 'post'], 'blog/admin/videos/listar', 'AdminVideosController@listar');
+       SimpleRouter::match(['get', 'post'], 'blog/admin/videos/cadastrar', 'AdminVideosController@cadastrar');
+       SimpleRouter::match(['get', 'post'], 'blog/admin/videos/save', 'AdminVideosController@save');
+       SimpleRouter::match(['get', 'post'], 'blog/admin/videos/editar/{id}', 'AdminVideosController@editar');
+       SimpleRouter::match(['get', 'post'], 'blog/admin/videos/deletar/{id}', 'AdminVideosController@deletar');
+
+       
+        /**Catagoria  */
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/cadastrar', 'AdminCategoriasController@cadastrar');
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/cadastrar', 'AdminPostsController@cadastrar');
-
-        
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/editar/{id}', 'AdminPostsController@editar');
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/update/{id}', 'AdminPostsController@update');
-
-        /**editar posts e categoria*/
+        SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/save', 'AdminCategoriasController@save');
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/editar/{id}', 'AdminCategoriasController@editar');
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/update/{id}', 'AdminCategoriasController@editar');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/deletar/{id}', 'AdminCategoriasController@deletar');
+         SimpleRouter::get('blog/admin/categorias/listar', 'AdminCategoriasController@listar');
 
-        /**Deletar */
-        SimpleRouter::get( 'blog/admin/categorias/deletar/{id}', 'AdminCategoriasController@deletar');
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/deletar/{id}', 'AdminPostsController@deletar');
+
+        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/cadastrar', 'AdminPostsController@cadastrar');        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/editar/{id}', 'AdminPostsController@editar');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/update/{id}', 'AdminPostsController@update');
+        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/deletar/{id}', 'AdminPostsController@deletar');  
+         SimpleRouter::get('blog/admin/posts/listar', 'AdminPostsController@listar');      
 
     });
     

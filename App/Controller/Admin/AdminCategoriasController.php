@@ -28,29 +28,42 @@ class AdminCategoriasController extends Controller
 
     public function cadastrar()
     {
-        //$categorias = filter_input_array(INPUT_POST);
-        $categorias = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        var_dump($categorias);
-        /*if (isset($categorias)) {
-            (new Category())->save($categorias);
-            Helpers::redirect('admin/categorias/listar');
-        }
+
         $categories = (new Category())->find();
         $dados = [
             "titulo" => 'Admin - OnlineBlog',
             "categorias" => $categories
         ];
-        echo $this->views->render('categoria/formulario.html', $dados);*/
+        echo $this->views->render('categoria/formulario.html', $dados);
     }
 
+    public function save()
+    {
+
+        $categorias = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        if (!array_filter($categorias)) {
+
+            $this->message->error('favor preencher os campos')->flash();
+            Helpers::redirect('/admin/categorias/cadastrar');
+            return;
+        }
+
+        (new Category())->save($categorias);
+        $this->message->success('Dados Cadastrado com sucesso')->flash();
+        Helpers::redirect('/admin/categorias/listar');
+        return;
+    }
 
     public function editar(int $id): void
     {
         $categoria = (new Category())->findById($id);
-        
+       
+
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if (isset($dados)) {
             (new Category())->update($dados, "id = {$id}");
+            $this->message->success(mensagem: 'categorias editadas com sucesso')->flash();
             Helpers::redirect('/admin/categorias/listar');
         }
 
@@ -63,12 +76,12 @@ class AdminCategoriasController extends Controller
     }
 
     public function deletar(int $id): void
-    {  
+    {
         $id = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         var_dump($id);
         if (isset($id)) {
-            (new Category())->delete( "id = $id");
-             Helpers::redirect('/admin/categorias/listar');
+            (new Category())->delete("id = $id");
+            Helpers::redirect('/admin/categorias/listar');
         }
     }
 }

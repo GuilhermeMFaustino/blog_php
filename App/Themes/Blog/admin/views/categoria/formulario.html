@@ -21,14 +21,14 @@
               <p>Cadastro de Categoria</p>
 
               <div class="table-responsive">
-                <form action="{% if editarcategoria.id %}{{url('/admin/categorias/editar/'~editarcategoria.id)}}{% else %}{{url('/admin/categorias/cadastrar')}}{% endif %}" method="post">
+                <form action="{% if editarcategoria.id %}{{url('/admin/categorias/editar/'~editarcategoria.id)}}{% else %}{{url('/admin/categorias/save')}}{% endif %}" method="post">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Titulo</label>
                 <input type="text" name="title" id="titulo" class="form-control" value="{{editarcategoria.title}}" placeholder="Titulo">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Texto</label>
-                <textarea name="text" id="description" class="form-control" rows="3">{{ editarcategoria.description }}</textarea>
+                <textarea name="text" id="description" class="form-control" rows="3">{{ editarcategoria.text }}</textarea>
 
             </div>
             <div class="form-check">
