@@ -51,7 +51,7 @@ try {
        SimpleRouter::match(['get', 'post'], 'blog/admin/videos/deletar/{id}', 'AdminVideosController@deletar');
 
        
-        /**Catagoria  */
+        /**Categoria  */
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/cadastrar', 'AdminCategoriasController@cadastrar');
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/save', 'AdminCategoriasController@save');
         SimpleRouter::match(['get', 'post'], 'blog/admin/categorias/editar/{id}', 'AdminCategoriasController@editar');
@@ -60,11 +60,43 @@ try {
          SimpleRouter::get('blog/admin/categorias/listar', 'AdminCategoriasController@listar');
 
 
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/cadastrar', 'AdminPostsController@cadastrar');        
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/editar/{id}', 'AdminPostsController@editar');
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/update/{id}', 'AdminPostsController@update');
-        SimpleRouter::match(['get', 'post'], 'blog/admin/posts/deletar/{id}', 'AdminPostsController@deletar');  
-         SimpleRouter::get('blog/admin/posts/listar', 'AdminPostsController@listar');      
+         SimpleRouter::match(['get', 'post'], 'blog/admin/posts/cadastrar', 'AdminPostsController@cadastrar');        
+         SimpleRouter::match(['get', 'post'], 'blog/admin/posts/editar/{id}', 'AdminPostsController@editar');
+         SimpleRouter::match(['get', 'post'], 'blog/admin/posts/update/{id}', 'AdminPostsController@update');
+         SimpleRouter::match(['get', 'post'], 'blog/admin/posts/deletar/{id}', 'AdminPostsController@deletar');  
+         SimpleRouter::get('blog/admin/posts/listar', 'AdminPostsController@listar');     
+         
+        /**Time*/ 
+        SimpleRouter::match(['get', 'post'], 'blog/admin/times/listar', 'AdminTimesController@listar');        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/times/cadastrar', 'AdminTimesController@cadastrar');        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/times/save', 'AdminTimesController@save');        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/times/editar/{id}', 'AdminTimesController@editar');        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/times/update/{id}', 'AdminTimesController@update');        
+        SimpleRouter::match(['get', 'post'], 'blog/admin/times/deletar/{id}', 'AdminTimesController@deletar'); 
+        
+        
+        /**Jogos */
+        SimpleRouter::match(['get', 'post'], 'blog/admin/jogos/listar', 'AdminJogosController@listar');  
+        SimpleRouter::match(['get', 'post'], 'blog/admin/jogos/cadastrar', 'AdminJogosController@cadastrar');  
+        SimpleRouter::match(['get', 'post'], 'blog/admin/jogos/save', 'AdminJogosController@save');  
+        SimpleRouter::match(['get', 'post'], 'blog/admin/jogos/editar/{id}', 'AdminJogosController@editar');  
+        SimpleRouter::match(['get', 'post'], 'blog/admin/jogos/update/{id}', 'AdminJogosController@update');  
+        SimpleRouter::match(['get', 'post'], 'blog/admin/jogos/deletar/{id}', 'AdminJogosController@deletar');  
+
+
+        /**Cidades */
+         SimpleRouter::match(['get', 'post'], 'blog/admin/cidades/listar', 'AdminCidadesController@listar'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/cidades/cadastrar', 'AdminCidadesController@cadastrar');
+         SimpleRouter::match(['get', 'post'], 'blog/admin/cidades/save', 'AdminCidadesController@save'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/cidades/editar/{id}', 'AdminCidadesController@editar'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/cidades/update/{id}', 'AdminCidadesController@update'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/cidades/deletar/{id}', 'AdminCidadesController@deletar'); 
+
+
+         /**Clubes */
+         SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/listar', 'AdminClubesController@listar'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/cadastrar', 'AdminClubesController@cadastrar'); 
+
 
     });
     

@@ -1,0 +1,79 @@
+{% extends "main.html" %} {% block content %}
+
+<div class="nxl-content">
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-title">
+      <h5 class="m-b-10">Dashboard</h5>
+    </div>
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url('/')}}">Videos</a></li>
+      <li class="breadcrumb-item">Videos</li>
+    </ul>
+  </div>
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card stretch stretch-full">
+          <div class="card-body">
+            {{ flash() }}
+            <div class="card-body">
+              <a href="{{url('/admin/clubes/cadastrar') }}" class="btn btn-primary" value="Cadastrar Categoria"
+                style="margin-bottom: 10px; max-width: 180px">Cadastro de Clubes</a>
+              <p>Bem-vindo a pagina de Jogos</p>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Mandante</th>
+                      <th scope="col">Visitante</th>
+                      <th scope="col">Cidade Mandante</th>
+                      <th scope="col">Cidade Visitante</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Hora</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Editar</th>
+                      <th scope="col">Deletar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% for jogo in jogos %}
+                    <tr>
+                      <th scope="row">{{ jogo.id}}</th>
+                      <th scope="row">{{ jogo.nome_time_um }}</th>
+                      <td>{{ jogo.nome_time_dois }}</td>
+                      <td>{{ jogo.cidade_time_um }}</td>
+                      <td>{{ jogo.cidade_time_dois }}</td>          
+                      <td>
+                        {% if jogo.status == 1 %}
+                        <i class="bi bi-check text-success"></i>
+                        {% else %}
+                        <i class="bi bi-x-circle text-danger"></i>
+                        {% endif %}
+                      </td>
+                      <td>{{ jogo.hora }}</td>
+                      <td>{{ jogo.created_at|date("d/m/Y") }}</td>
+                      <td>
+                        <a href="{{url('/admin/jogos/editar/'~jogo.id)}}"><i
+                            class="bi bi-pencil-square text-info"></i></a>
+                      </td>
+                      <td>
+                        <a href="{{url('/admin/jogos/deletar/'~jogo.id)}}"><i
+                            class="bi bi-trash3 text-danger"></i></a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

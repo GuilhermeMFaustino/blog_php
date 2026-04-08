@@ -1,0 +1,63 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="nxl-content">
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <h5>Usuario</h5>
+    </div>
+  </div>
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card stretch stretch-full">
+          <div class="card-body">
+            <form
+              action="{% if city.id %}{{url('/admin/cidades/update/'~city.id)}}{% else %}{{url('/admin/cidades/save')}}{% endif %}"
+              method="POST" enctype="multipart/form-data">
+              <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
+                <div class="card-body personal-info">
+                  <div class="mb-4 d-flex align-items-center justify-content-between">
+                    <h5 class="fw-bold mb-0 me-4">
+                      <label>Cidades</label>
+                      <span class="d-block mb-2"></span>
+                    </h5>
+                  </div>
+                  <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8">
+                      <div class="input-group">
+                        <div class="input-group-text"><i class="feather-award"></i></div>
+                        <input type="text" name="name" class="form-control" id="fullnameInput"
+                          value="{{ city.name}}" placeholder="Digite o nome da cidade">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input status-check" type="radio" name="status" value="1" {% if
+                      city.status==1 %}checked{% endif %} id="checkDefault">
+                    <label class="form-check-label" for="checkDefault">
+                      ativo
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input status-check" type="radio" name="status" value="0" {% if
+                      city.status==0 %}checked{% endif %} id="checkChecked">
+                    <label class="form-check-label" for="checkChecked">
+                      Inativo
+                    </label>
+                  </div>
+                  <input type="submit" class="btn btn-primary"
+                    value="{% if city.id %}Atualizar Cidade{% else %}Cadastrar Cidade{% endif %}">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="tab-content">
+
+  {% endblock %}

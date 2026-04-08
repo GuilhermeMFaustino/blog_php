@@ -15,7 +15,10 @@ class AdminVideosController extends Controller
     public function listar()
     {
         $videos = (new Videos())->find();
+        $userLogged = (new UserController())->userLogged();
+
         $dados = [
+            "userLogged" => $userLogged,
             "videos" => $videos
         ];
 
@@ -76,15 +79,15 @@ class AdminVideosController extends Controller
     public function deletar($id)
     {
         $videodelet = (new Videos())->findByid($id);
-        if(!$videodelet){
-             $this->message->error('Nenhum vídeo encontrado.')->flash();
+        if (!$videodelet) {
+            $this->message->error('Nenhum vídeo encontrado.')->flash();
             Helpers::redirect('/admin/videos/listar');
             return;
         }
-        if($videodelet){
+        if ($videodelet) {
             (new Videos())->delete("id = {$id}");
-             $this->message->success('video deletado com sucesso.')->flash();
-             Helpers::redirect('/admin/videos/listar');
+            $this->message->success('video deletado com sucesso.')->flash();
+            Helpers::redirect('/admin/videos/listar');
             return;
         }
         var_dump($videodelet);

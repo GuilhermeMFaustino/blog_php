@@ -1,0 +1,88 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="nxl-content">
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="page-header-left">
+            <h5>Usuario</h5>
+        </div>
+    </div>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card stretch stretch-full">
+                    <div class="card-body">
+                        <form
+                            action="{% if editJogo.id %}{{ url('/admin/jogos/update/' ~ editJogo.id) }}{% else %}{{ url('/admin/jogos/save') }}{% endif %}"
+                            method="POST" enctype="multipart/form-data">
+
+                            <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
+                                <div class="card-body personal-info">
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6 mb-4">
+                                            <select class="form-control" name="cityUm">
+                                                <option value="">Selecione a cidades do Clube</option>
+                                                {% for city in cidades %}
+                                                <option value="{{ city.id }}">
+                                                    {{ city.name }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Data de Fundação do Clube</label>
+                                            <input type="text" name="title" id="fundacao" class="form-control"
+                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Cores do Clube</label>
+                                            <input type="text" name="title" id="cores" class="form-control"
+                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Titulos / Campeonatos</label>
+                                            <input type="text" name="title" id="titulo" class="form-control"
+                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Campo / Estadio</label>
+                                            <input type="text" name="title" id="estadio" class="form-control"
+                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <input class="form-check-input status-check" type="radio" name="status"
+                                                value="1" {% if times.status==1 %}checked{% endif %} id="checkDefault">
+                                            <label class="form-check-label" for="checkDefault">
+                                                ativo
+                                            </label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input class="form-check-input status-check" type="radio" name="status"
+                                                value="0" {% if times.status==0 %}checked{% endif %} id="checkChecked">
+                                            <label class="form-check-label" for="checkChecked">
+                                                Inativo
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="submit" class="btn btn-primary"
+                                value="{% if editJogo.id %}Atualizar{% else %}Cadastrar{% endif %}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-content">
+
+    {% endblock %}

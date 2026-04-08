@@ -40,7 +40,6 @@ class WebController extends Controller
                 $post->thumb
             );*/
         }
-        //var_dump($posts);
 
         $dados = [
             "titulo" => 'OnlineBlog',

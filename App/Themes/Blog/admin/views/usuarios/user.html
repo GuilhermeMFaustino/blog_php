@@ -34,7 +34,7 @@
                       <th scope="col">#</th>
                       <th scope="col">{{ imagem }}</th>
                       <th scope="col">Avatar</th>
-                      <th scope="col">Texto</th>
+                      <th scope="col">E-mail</th>
                       <th scope="col">Nivel</th>
                       <th scope="col">Status</th>
                       <th scope="col">data de cadastro</th>
@@ -49,7 +49,7 @@
                       <th scope="row">{{post.id}}</th>
                       <td>{{post.name}}</td>
                       <td><img src="{{ url( post.thumb) }}" /></td>
-                      <td>{{ strLmWords(post.email) }}</td>
+                      <td>{{ post.email }}</td>
                       <td>{{ post.level }}</td>
                       <td>
                         {% if post.status == 1 %}

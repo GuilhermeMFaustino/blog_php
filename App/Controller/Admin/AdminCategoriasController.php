@@ -6,19 +6,24 @@ namespace App\Controller\Admin;
 use App\Core\Controller;
 use App\Models\Category;
 use App\Models\Posts;
+use App\Models\User;
 use App\Support\Helpers;
 
 class AdminCategoriasController extends Controller
 {
+   
     public function __construct()
-    {
+    {      
         return parent::__construct('App/Themes/Blog/admin/views/');
     }
 
     public function listar()
     {
         $categories = (new Category())->find();
+        $userLoged = (new UserController())->userLogged();
+
         $dados = [
+           "userLogged" => $userLoged,
             "titulo" => 'Admin - OnlineBlog',
             "categoria" => $categories
         ];

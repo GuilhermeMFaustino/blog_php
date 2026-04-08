@@ -42,41 +42,29 @@ abstract class Models
      * @param mixed $columns
      * @return array
      */
-
-    /*public function find(?string $terms = null, ?string $params = null, string $columns = "*"): ?Models
-    {
-        if($terms){
-            $this->query = "SELECT {$columns} FROM {$this->table} WHERE {$terms}";
-            parse_str($params, $this->params);
-            return $this;
-        }
-        $this->query = "SELECT {$columns} FROM {$this->table}";
-        return $this;
-    }*/
-
     public function find(?string $params = null, ?string $bind = null, ?string $columns = "*")
-{
-    $sql = "SELECT {$columns} FROM {$this->table}";
+    {
+        $sql = "SELECT {$columns} FROM {$this->table}";
+        if ($params) {
+            $sql .= " WHERE {$params}";
+        }
 
-    if ($params) {
-        $sql .= " WHERE {$params}";
+        $sql .= $this->order ?? '';
+        $sql .= $this->limit ?? '';
+        $sql .= $this->offset ?? '';
+
+        $stmt = $this->conn->prepare($sql);
+ //var_dump($stmt);
+
+        if ($bind) {
+            parse_str($bind, $params);
+            $stmt->execute($params);
+        } else {
+            $stmt->execute();
+        }
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
-
-    $sql .= $this->order ?? '';
-    $sql .= $this->limit ?? '';
-    $sql .= $this->offset ?? '';
-
-    $stmt = $this->conn->prepare($sql);
-
-    if ($bind) {
-        parse_str($bind, $params);
-        $stmt->execute($params);
-    } else {
-        $stmt->execute();
-    }
-
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
-}
 
 
 
@@ -164,19 +152,19 @@ abstract class Models
     }
 
 
-    
-   public function findByEmail(string $email, string $terms = "", string $columns = "*"): ?object
-{
-    // Usamos coalescência para evitar erros caso $terms seja null
-    $query = "SELECT {$columns} FROM {$this->table} WHERE email = :email " . ($terms ?: "");
-    
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->execute();
-    // Retorna o objeto ou null se não encontrar nada
-    $result = $stmt->fetch(PDO::FETCH_OBJ);
-    return $result ?: null;
-}
+
+    public function findByEmail(string $email, string $terms = "", string $columns = "*"): ?object
+    {
+        // Usamos coalescência para evitar erros caso $terms seja null
+        $query = "SELECT {$columns} FROM {$this->table} WHERE email = :email " . ($terms ?: "");
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        // Retorna o objeto ou null se não encontrar nada
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        return $result ?: null;
+    }
 
 
 

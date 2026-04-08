@@ -8,7 +8,7 @@ use Twig\Lexer;
 use Twig\TwigFunction;
 use App\Support\Helpers;
 
-class Views
+class Views extends Controller
 {
     private $twig;
 

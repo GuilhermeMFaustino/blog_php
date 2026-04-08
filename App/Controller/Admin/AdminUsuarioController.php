@@ -13,62 +13,62 @@ class AdminUsuarioController extends Controller
 {
 
 
-    protected User $user;
+    protected User $model;
 
     public function __construct()
     {
-        $this->user = new User();
         parent::__construct('App/Themes/Blog/admin/views/');
+        $this->model = new User();
     }
 
     public function listar()
     {
-        $user = $this->user->order('level  DESC, status ASC')->find();
+        $user = $this->model->order('level DESC, status ASC')->find();
 
-        $cropper = new Cropper("App/Themes/Blog/admin/assets/images/avatar/cache");
+     $userLoged = (new UserController())->userLogged();
 
-        $base = "App/Themes/Blog/admin/assets/images/avatar";
-        $default = "{$base}/undefined.png";
+    $cropper = new Cropper("App/Themes/Blog/admin/assets/images/avatar/cache");
 
-        foreach ($user as $u) {
+    $base = "App/Themes/Blog/admin/assets/images/avatar";
+    $default = "{$base}/undefined.png";
 
-            $path = "{$base}/{$u->avatar}";
-            if (
-                empty($u->avatar) ||
-                !file_exists($path) ||
-                !pathinfo($path, PATHINFO_EXTENSION)
-            ) {
-                $path = $default;
-            }
+    foreach ($user as $u) {
 
-            $thumb = $cropper->make($path, 40, 40);
-
-            $userLoged = UserController::user();
-
-            if ($u->id == $userLoged->id) {
-                $userLoged->avatar = $thumb;
-            }
-            
-            $u->thumb = $thumb;
-            //var_dump($userLoged->avatar = $thumb);
+        $path = "{$base}/{$u->avatar}";
+        if (
+            empty($u->avatar) ||
+            !file_exists($path) ||
+            !pathinfo($path, PATHINFO_EXTENSION)
+        ) {
+            $path = $default;
         }
 
+        $thumb = $cropper->make($path, 40, 40);
+
+        // ✅ valida antes de usar
+        if ($userLoged && $u->id == $userLoged->id) {
+            $userLoged->avatar = $thumb;
+        }
+
+        $u->thumb = $thumb;
+    }
+      
+       //var_dump($userLoged);
+      // exit;
         $dados = [
             "user" => $user,
-            "userLogged" => $userLoged->avatar = $thumb,
+            "userLogged" => $userLoged,
             "total" => [
-                "user" => $this->user->total(),
+                "user" => $this->model->total(),
             ]
         ];
-        //var_dump($dados, );
-        //exit;
+        
         echo $this->views->render('usuarios/user.html', $dados);
     }
 
     public function cadastrar()
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT) ?? [];
-
 
         if (empty($dados)) {
             echo $this->views->render('usuarios/formulario.html', []);
@@ -83,8 +83,8 @@ class AdminUsuarioController extends Controller
             return;
         }
 
-        if (!empty($dados['email'])) {
-            $user = $this->user->findByEmail($dados['email']);
+        if (!empty($dados)) {
+            $user = (new User())->findByEmail($dados['email']);
 
             if ($user) {
                 $this->message->error("E-mail {$user->email} já está cadastrado")->flash();

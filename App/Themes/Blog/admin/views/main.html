@@ -3,28 +3,20 @@
     <title>{% block title %}Dashboard{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
     <link rel="stylesheet" href="{{ url('App/Themes/Blog/admin/assets/css/message.css')}}" />
-
-    
 
     {% include "partials/styles.html" %}
 </head>
-
-
 <body>
+    {% include "partials/sidebar.html" %}
+    {% include "partials/header.html" %}
 
-{% include "partials/sidebar.html" %}
-{% include "partials/header.html" %}
-
-<!-- MAIN CONTAINER (APENAS UM) -->
-<main class="nxl-container">
-    {% block content %}{% endblock %}
-</main>
-
-{% include "partials/footer.html" %}
-{% include "partials/theme-customizer.html" %}
-{% include "partials/scripts.html" %}
-
+    <!-- MAIN CONTAINER (APENAS UM) -->
+    <main class="nxl-container">
+        {% block content %}{% endblock %}
+        {% include "partials/footer.html" %}
+        {% include "partials/scripts.html" %}
+    </main>
 </body>
+
 </html>

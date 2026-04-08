@@ -7,6 +7,7 @@ use App\Core\Controller;
 use App\Core\Upload;
 use App\Models\Category;
 use App\Models\Posts;
+use App\Models\User;
 use App\Support\Helpers;
 use CoffeeCode\Cropper\Cropper;
 
@@ -15,14 +16,20 @@ class AdminPostsController extends Controller
 
 
     protected Posts $posts;
+
+    protected User $model;
     public function __construct()
     {
         $this->posts = new Posts();
+        $this->model = new User();
         return parent::__construct('App/Themes/Blog/admin/views/');
+
     }
     public function listar()
     {
         $posts = $this->posts->order('status ASC')->find();
+
+       $userLoged = (new UserController())->userLogged();
 
         $cropper = new Cropper("App/Themes/Blog/admin/assets/images/posts/cache");
 
@@ -43,10 +50,11 @@ class AdminPostsController extends Controller
             }
             $u->thumb = $cropper->make($path, 40, 40);
         }
-
+        
 
         $dados = [
             "posts" => $posts,
+            "userLogged" => $userLoged,
             "titulo" => 'Admin - OnlineBlog'
         ];
 
