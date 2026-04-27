@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Pernambuco Football Pulse | Futebol Amador de PE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+  <meta charset="UTF-8" />
+  <title>Pernambuco Football Pulse | Futebol Amador de PE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    />
-    <!-- CSS próprio -->
-    <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/css/webStyle.css') }}" />
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#022C22",
-              secondary: "#058861",
-            },
+  <!-- Feather Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <!-- choose one -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <!-- CSS próprio -->
+  <link rel="stylesheet" href="{{ url('App/Themes/Blog/Web/assets/css/webStyle.css') }}" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#022C22",
+            secondary: "#058861",
           },
         },
-      };
-    </script>
-  </head>
-  <body class="bg-gray-50">
+      },
+    };
+  </script>
+</head>
 
+<body class="bg-gray-50">
   {% include 'home.html' %}
 
   {% block slider %}{% endblock %}
@@ -41,4 +42,5 @@
   {% include 'footer.html' %}
 
 </body>
+
 </html>

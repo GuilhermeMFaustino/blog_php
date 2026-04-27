@@ -16,7 +16,7 @@
         <div class="card stretch stretch-full">
           <div class="card-body">
             <form
-              action="{% if videosEdit.id %}{{url('/admin/videos/editar/'~videosEdit.id)}}{% else %}{{url('/admin/videos/editar')}}{% endif %}"
+              action="{% if videosEdit.id %}{{url('/admin/videos/editar/'~videosEdit.id)}}{% else %}{{url('/admin/videos/save')}}{% endif %}"
               method="POST" enctype="multipart/form-data">
               <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
                 <div class="card-body personal-info">

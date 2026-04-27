@@ -8,6 +8,8 @@ use App\Core\Session;
 use App\Models\Posts;
 use App\Support\Helpers;
 use App\Controller\Admin\UserController;
+use App\Core\Visits;
+use App\Models\Online;
 use App\Models\User;
 use CoffeeCode\Cropper\Cropper;
 
@@ -34,12 +36,21 @@ class AdminController extends Controller
         $posts = (new Posts());
 
         $userLoged = (new UserController())->userLogged();
+        $countOnline = (new Online())->countOnline();
+
+        $totalDeVisitas = (new Visits())->countVisitas();
+        //var_dump($totalDeVisitas);
+
 
         $dados = [
             "titulo" => 'Admin - OnlineBlog',
             "userLogged" => $userLoged,
+            "count" => $countOnline,
+            "totVisitas" => $totalDeVisitas,
+
+
             "total" => [
-                'total' => $posts->total(),
+                'totalPosts' => $posts->total(),
                 'ativo' => $posts->total('status = 1'),
                 'inativo' => $posts->total('status = 0')
             ]

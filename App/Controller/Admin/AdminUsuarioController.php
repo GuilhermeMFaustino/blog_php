@@ -52,7 +52,6 @@ class AdminUsuarioController extends Controller
 
         $u->thumb = $thumb;
     }
-      
        //var_dump($userLoged);
       // exit;
         $dados = [

@@ -5,8 +5,10 @@ namespace App\Controller\Admin;
 
 use App\Core\Controller;
 use App\Models\Cidades;
+use App\Models\Clubes;
 use App\Models\Times;
 use App\Support\Helpers;
+use CoffeeCode\Cropper\Cropper;
 
 class AdminClubesController extends Controller
 {
@@ -17,12 +19,34 @@ class AdminClubesController extends Controller
     }
     public function listar()
     {
-        $times = (new Times())->find();
+        $userLogged = (new UserController())->userLogged();
         
-         $userLogged = (new UserController())->userLogged();
+        $findCidades = (new Clubes())->findClubes();
+
+
+         foreach ($findCidades as $jogo) {
+            $cropper = new Cropper(
+                ROOT . "/App/Themes/Blog/admin/assets/images/time/cache"
+            );
+
+            $jogo->thumb = $cropper->make(
+                ROOT . "/App/Themes/Blog/admin/assets/images/time/{$jogo->imagem}",
+                50,
+                50
+            );
+           
+            $jogo->thumb = str_replace(
+                ROOT,
+                URL_DESENVOLVIMENTO,
+                $jogo->thumb
+            );
+
+        }
+
         $dados = [
             "userLogged" => $userLogged,
-            "times" => $times,
+            "findCidades" => $findCidades,
+
         ];
 
         echo $this->views->render("clubes/clubes.html", $dados);
@@ -33,87 +57,94 @@ class AdminClubesController extends Controller
     {
         $cidades = (new Cidades())->find();
 
-        $dados = [
+        $userLogged = (new UserController())->userLogged();
 
-            "city" => $cidades
+        $dados = [
+            "city" => $cidades,
+            "userLogged" => $userLogged
         ];
 
         echo $this->views->render("clubes/formulario.html", $dados);
     }
 
 
-    /*public function save()
+    public function save()
     {
-        $dadosTime = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if (!array_filter($dadosTime)) {
+        $dadosClubes = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        
+        if (!array_filter($dadosClubes)) {
             $this->message->error("Favor preencher todos os Dados")->flash();
-            Helpers::redirect('/admin/times/cadastrar');
+            Helpers::redirect('/admin/clubes/cadastrar');
             return;
         }
-        $timeExistente = (new Times())->find("time = :time", "time={$dadosTime['time']}");
-        if ($timeExistente) {
+        $clubeExistente = (new Clubes())->find("name = :name", "name={$dadosClubes['name']}");
+        if ($clubeExistente) {
             $this->message->error("Time já Cadastrado")->flash();
-            Helpers::redirect('/admin/times/cadastrar');
+            Helpers::redirect('/admin/clubes/cadastrar');
             return;
         }
-        (new Times())->save($dadosTime);
+        (new Clubes())->save($dadosClubes);       
         $this->message->success("Time Cadastrado com sucesso!")->flash();
-        Helpers::redirect('/admin/times/listar');
+        Helpers::redirect('/admin/clubes/listar');
         return;
     }
 
 
     public function editar($id)
     {
-        $searchTimes = (new Times())->findByid("$id");
+        $searchClubes = (new Clubes())->findByid("$id");
+
+        $city = (new Cidades())->findByidCity($id);
+
         $dados = [
-            "timesEdit" => $searchTimes
+            "clubesEdit" => $searchClubes,
+            "city" => $city
         ];
 
-        echo $this->views->render("Times/formulario.html", $dados);
+        echo $this->views->render("clubes/formulario.html", $dados);
     }    
 
 
     public function update($id)
     {
         $iputedit = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $updateTimes = (new Times())->findByid($id);
+        $updateTimes = (new Clubes())->findByid($id);
         if (!$updateTimes) {
             $this->message->error("Não existe dados para atalização")->flash();
-            Helpers::redirect("/admin/times/editar/{$id}");
+            Helpers::redirect("/admin/clubes/editar/{$id}");
             return;
         }
 
-        $timeExistente = (new Times())->find("time = :time", "time={$iputedit['time']}");
+       $clubeExistente = (new Clubes())->find("name = :name", "name={$iputedit['name']}");
        
-        if ($timeExistente) {
+        if ($clubeExistente) {
             $this->message->error("Time já Cadastrado")->flash();
-           Helpers::redirect("/admin/times/editar/{$id}");
+           Helpers::redirect("/admin/clubes/editar/{$id}");
             return;
         }
         if ($updateTimes) {
-            (new Times())->update($iputedit, "id = {$id}");
+            (new Clubes())->update($iputedit, "id = {$id}");
             $this->message->success('Time Atualizado com sucesso.')->flash();
-            Helpers::redirect("/admin/times/listar");
+            Helpers::redirect("/admin/clubes/listar");
             return;
         }
     }
 
 
-    public function deletar($id)
+    public function delete($id)
     {
-        $serachDelete = (new Times())->findByid($id);
+        $serachDelete = (new clubes())->findByid($id);
         if (!$serachDelete) {
             $this->message->error("Não existe Times para deletar")->flash();
-            Helpers::redirect("/admin/times/deletar/{$id}");
+            Helpers::redirect("/admin/clubes/delete/{$id}");
             return;
         }
 
         if ($serachDelete) {
-            (new Times())->delete("id = $id");
+            (new Clubes())->delete("id = $id");
             $this->message->success("Time Deletado com sucesso")->flash();
-            Helpers::redirect("/admin/times/listar");
+            Helpers::redirect("/admin/clubes/listar");
             return;
         }
-    }*/
+    }
 }

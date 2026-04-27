@@ -24,11 +24,11 @@
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="avatar-text avatar-xl rounded bg-primary text-white">
-                                            <i class="feather-users"></i>
+                                            <i class="feather feather-eye"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
                                             <span class="text-truncate-1-line">Total de visitas</span>
-                                            <span class="fs-24 fw-bolder d-block">203</span>
+                                            <span class="fs-24 fw-bolder d-block">{{ totVisitas }}</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-success text-success">
@@ -45,11 +45,11 @@
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="avatar-text avatar-xl rounded bg-success text-white">
-                                            <i class="feather-user-check"></i>
+                                            <i class="feather feather-activity"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
                                             <span class="text-truncate-1-line">Pessoas Online</span>
-                                            <span class="fs-24 fw-bolder d-block">200</span>
+                                            <span class="fs-24 fw-bolder d-block">{{ count }}</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-danger text-danger">
@@ -66,11 +66,74 @@
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="avatar-text avatar-xl rounded bg-teal text-white">
+                                            <i class="feather feather-file-text"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">Total de Posts</span>
+                                            <span class="fs-24 fw-bolder d-block">{{ total.totalPosts }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-success text-success">
+                                        <i class="feather-arrow-up fs-10 me-1"></i>
+                                        <span>33.29%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-teal text-white">
                                             <i class="feather-user-plus"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
-                                            <span class="text-truncate-1-line">Total de Artigos</span>
-                                            <span class="fs-24 fw-bolder d-block">60</span>
+                                            <span class="text-truncate-1-line">Posts Ativos</span>
+                                            <span class="fs-24 fw-bolder d-block">{{ total.ativo }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-success text-success">
+                                        <i class="feather-arrow-up fs-10 me-1"></i>
+                                        <span>33.29%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-teal text-white">
+                                            <i class="feather-user-plus"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">Posts Inativos</span>
+                                            <span class="fs-24 fw-bolder d-block">{{ total.inativo }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-success text-success">
+                                        <i class="feather-arrow-up fs-10 me-1"></i>
+                                        <span>33.29%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-teal text-white">
+                                            <i class="eye"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">Total de Posts</span>
+                                            <span class="fs-24 fw-bolder d-block">{{ totalPosts }}</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-success text-success">
@@ -90,8 +153,30 @@
                                             <i class="feather-user-minus"></i>
                                         </div>
                                         <a href="javascript:void(0);" class="fw-bold d-block">
-                                            <span class="text-truncate-1-line">Total de Usuarios Inativos</span>
-                                            <span class="fs-24 fw-bolder d-block">5</span>
+                                            <span class="text-truncate-1-line">##</span>
+                                            <span class="fs-24 fw-bolder d-block">0</span>
+                                        </a>
+                                    </div>
+                                    <div class="badge bg-soft-danger text-danger">
+                                        <i class="feather-arrow-down fs-10 me-1"></i>
+                                        <span>42.47%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card stretch stretch-full">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="avatar-text avatar-xl rounded bg-danger text-white">
+                                            <i class="feather-user-minus"></i>
+                                        </div>
+                                        <a href="javascript:void(0);" class="fw-bold d-block">
+                                            <span class="text-truncate-1-line">##</span>
+                                            <span class="fs-24 fw-bolder d-block">0</span>
                                         </a>
                                     </div>
                                     <div class="badge bg-soft-danger text-danger">
@@ -116,23 +201,8 @@
                                             <div class="fs-4 fw-bold text-dark"><span class="counter">{{ total.ativo }}</span></div>
                                             <h3 class="fs-13 fw-semibold text-truncate-1-line">Posts Ativos</h3>
                                         </div>
-                                    </div>
-                                    <a href="javascript:void(0);" class="">
-                                        <i class="feather-more-vertical"></i>
-                                    </a>
-                                </div>
-                                <div class="pt-4">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <a href="javascript:void(0);" class="fs-12 fw-medium text-muted text-truncate-1-line">Invoices Awaiting </a>
-                                        <div class="w-100 text-end">
-                                            <span class="fs-12 text-dark">$5,569</span>
-                                            <span class="fs-11 text-muted">(56%)</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress mt-2 ht-3">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 56%"></div>
-                                    </div>
-                                </div>
+                                    </div>                                    
+                                </div>                              
                             </div>
                         </div>
                     </div>

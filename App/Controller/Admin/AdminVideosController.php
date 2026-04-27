@@ -34,15 +34,15 @@ class AdminVideosController extends Controller
     public function save()
     {
         $videos = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        var_dump($videos);
+        //exit;
 
         if (!array_filter($videos)) {
             $this->message->error("erro precisa de um link de video")->flash();
             Helpers::redirect("/admin/videos/cadastrar");
             return;
         }
-        $videosSearch = (new Videos())->find(
-            "video = :video",
-            "video={$videos['video']}"
+        $videosSearch = (new Videos())->find("video = '{$videos['video']}'"
         );
         if ($videosSearch) {
             $this->message->error('Video ja publicado')->flash();
@@ -67,7 +67,7 @@ class AdminVideosController extends Controller
         if ($dadosEdit) {
             (new Videos())->update($dadosEdit, "id = {$id}");
             $this->message->success('video atualizado com sucesso')->flash();
-            Helpers::redirect('/admin/videos/listar');
+            Helpers::redirect("/admin/videos/listar/{$id}");
         }
         $dados = [
             "videosEdit" => $videoList

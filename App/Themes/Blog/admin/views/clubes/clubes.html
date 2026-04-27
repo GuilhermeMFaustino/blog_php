@@ -27,41 +27,43 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Mandante</th>
-                      <th scope="col">Visitante</th>
-                      <th scope="col">Cidade Mandante</th>
-                      <th scope="col">Cidade Visitante</th>
+                      <th scope="col">Nome do Clube</th>
+                      <th scope="col">Escudo do Clube</th>
+                      <th scope="col">Data de Criacao</th>
+                      <th scope="col">Cores</th>
+                      <th scope="col">Titulos</th>
+                      <th scope="col">Estadio</th>
                       <th scope="col">Status</th>
-                      <th scope="col">Hora</th>
-                      <th scope="col">Data</th>
+                      <th scope="col">Data de Cadastro</th>
                       <th scope="col">Editar</th>
                       <th scope="col">Deletar</th>
                     </tr>
                   </thead>
                   <tbody>
 
-                    {% for jogo in jogos %}
+                    {% for clube in findCidades %}                   
                     <tr>
-                      <th scope="row">{{ jogo.id}}</th>
-                      <th scope="row">{{ jogo.nome_time_um }}</th>
-                      <td>{{ jogo.nome_time_dois }}</td>
-                      <td>{{ jogo.cidade_time_um }}</td>
-                      <td>{{ jogo.cidade_time_dois }}</td>          
+                      <th scope="row">{{ clube.id}}</th>
+                      <th scope="row"><img src="{{ clube.thumb }}"/></th>
+                      <th scope="row">{{ clube.name}}</th>
+                      <td>{{ data(clube.data_titulo) }}</td>
+                      <td>{{ clube.cores }}</td>
+                      <td>{{ clube.title is empty ? 0 : clube.title }}</td>  
+                      <td>{{ clube.estadio }}</td> 
                       <td>
-                        {% if jogo.status == 1 %}
+                        {% if clube.status == 1 %}
                         <i class="bi bi-check text-success"></i>
                         {% else %}
                         <i class="bi bi-x-circle text-danger"></i>
                         {% endif %}
-                      </td>
-                      <td>{{ jogo.hora }}</td>
-                      <td>{{ jogo.created_at|date("d/m/Y") }}</td>
+                      </td>                     
+                      <td>{{ clube.created_at|date("d/m/Y") }}</td>
                       <td>
-                        <a href="{{url('/admin/jogos/editar/'~jogo.id)}}"><i
+                        <a href="{{url('/admin/clubes/editar/'~clube.id)}}"><i
                             class="bi bi-pencil-square text-info"></i></a>
                       </td>
                       <td>
-                        <a href="{{url('/admin/jogos/deletar/'~jogo.id)}}"><i
+                        <a href="{{url('/admin/clubes/delete/'~clube.id)}}"><i
                             class="bi bi-trash3 text-danger"></i></a>
                       </td>
                     </tr>

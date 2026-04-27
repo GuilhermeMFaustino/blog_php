@@ -39,6 +39,12 @@ class Helpers
     }
 
 
+    public static function formatData(?string $data)
+    {
+        return date("d-m-Y", strtotime($data));
+    }
+
+
     /**
      * Summary of localhost
      * @return bool

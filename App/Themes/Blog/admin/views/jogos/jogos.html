@@ -43,8 +43,8 @@
                     {% for jogo in jogos %}
                     <tr>
                       <th scope="row">{{ jogo.id}}</th>
-                      <th scope="row">{{ jogo.nome_time_um }}</th>
-                      <td>{{ jogo.nome_time_dois }}</td>
+                      <th scope="row"><img src="{{ jogo.thumb }}"/> {{ jogo.nome_time_um }} </th>
+                      <td><img src="{{ jogo.thumb2 }}"/> {{ jogo.nome_time_dois }} </td>
                       <td>{{ jogo.cidade_time_um }}</td>
                       <td>{{ jogo.cidade_time_dois }}</td>          
                       <td>

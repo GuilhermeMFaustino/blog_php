@@ -96,6 +96,10 @@ try {
          /**Clubes */
          SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/listar', 'AdminClubesController@listar'); 
          SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/cadastrar', 'AdminClubesController@cadastrar'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/save', 'AdminClubesController@save'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/editar/{id}', 'AdminClubesController@editar'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/update/{id}', 'AdminClubesController@update'); 
+         SimpleRouter::match(['get', 'post'], 'blog/admin/clubes/delete/{id}', 'AdminClubesController@delete'); 
 
 
     });

@@ -91,9 +91,10 @@ class AdminCidadesController extends Controller
             return;
         }
 
-        $cidadesExistentes = (new Cidades())->find("name = :name", "name={$iputedit['name']}");
-        var_dump($cidadesExistentes);
-        // die();
+        $cidade = trim($iputedit['name']);
+
+
+        $cidadesExistentes = (new Cidades())->find("name='{$cidade}' AND id != {$id}");
 
         if ($cidadesExistentes) {
             $this->message->error("Time já Cadastrado")->flash();
@@ -111,7 +112,7 @@ class AdminCidadesController extends Controller
 
     public function deletar($id)
     {
-         $serachDelete = (new Cidades())->findByid($id);
+        $serachDelete = (new Cidades())->findByid($id);
         if (!$serachDelete) {
             $this->message->error("Não existe Times para deletar")->flash();
             Helpers::redirect("/admin/cidades/deletar/{$id}");

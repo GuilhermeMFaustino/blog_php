@@ -42,7 +42,7 @@ abstract class Models
      * @param mixed $columns
      * @return array
      */
-    public function find(?string $params = null, ?string $bind = null, ?string $columns = "*")
+    public function find(?string $params = null, ?string $columns = "*", ?string $bind = null,)
     {
         $sql = "SELECT {$columns} FROM {$this->table}";
         if ($params) {
@@ -54,7 +54,30 @@ abstract class Models
         $sql .= $this->offset ?? '';
 
         $stmt = $this->conn->prepare($sql);
- //var_dump($stmt);
+        if ($bind) {
+            parse_str($bind, $params);
+            $stmt->execute($params);
+            } else {
+                $stmt->execute();
+                //var_dump($stmt);
+                //die();
+           
+        }
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function findOne(?string $params = null, ?string $bind = null, ?string $columns = "*")
+    {
+        $sql = "SELECT {$columns} FROM {$this->table}";
+
+        if ($params) {
+            $sql .= " WHERE {$params}";
+        }
+
+        $sql .= " LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
 
         if ($bind) {
             parse_str($bind, $params);
@@ -63,7 +86,7 @@ abstract class Models
             $stmt->execute();
         }
 
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
 
@@ -107,18 +130,22 @@ abstract class Models
         }
     }
 
-    public function update(array $dados, string $termos): ?int
+    public function update(array $dados, string $termos, ?string $params = null): ?int
     {
         try {
             $set = [];
             foreach ($dados as $key => $value) {
                 $set[] = "{$key} = :{$key}";
             }
-            $set = implode(', ', $set);
-            $sql = "UPDATE {$this->table} SET {$set} WHERE {$termos}";
+
+            $sql = "UPDATE {$this->table} SET " . implode(', ', $set) . " WHERE {$termos}";
+
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute($dados);
-            return ($stmt->rowCount() ?? 1);
+
+            parse_str($params, $paramsArray);
+            $stmt->execute(array_merge($dados, $paramsArray));
+
+            return $stmt->rowCount();
         } catch (PDOException $ex) {
             $this->error = $ex->getMessage();
             return null;

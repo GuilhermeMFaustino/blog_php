@@ -7,6 +7,7 @@ use App\Models\Cidades;
 use App\Models\Jogos;
 use App\Models\Times;
 use App\Support\Helpers;
+use CoffeeCode\Cropper\Cropper;
 
 class AdminJogosController extends Controller
 {
@@ -23,6 +24,39 @@ class AdminJogosController extends Controller
 
         $jogos = (new Jogos())->serarchTimeCity();
 
+        foreach ($jogos as $jogo) {
+            $cropper = new Cropper(
+                ROOT . "/App/Themes/Blog/admin/assets/images/time/cache"
+            );
+
+            $jogo->thumb = $cropper->make(
+                ROOT . "/App/Themes/Blog/admin/assets/images/time/{$jogo->imagemTime}",
+                40,
+                40
+            );
+
+            $jogo->thumb2 = $cropper->make(
+                ROOT . "/App/Themes/Blog/admin/assets/images/time/{$jogo->imagem}",
+                40,
+                40
+            );
+            $jogo->thumb = str_replace(
+                ROOT,
+                URL_DESENVOLVIMENTO,
+                $jogo->thumb
+            );
+
+            $jogo->thumb2 = str_replace(
+                ROOT,
+                URL_DESENVOLVIMENTO,
+                $jogo->thumb2
+            );
+        }
+
+
+
+        //var_dump($jogos);
+        //die();
         $dados = [
             "userLogged" => $userLogged,
             "jogos" => $jogos

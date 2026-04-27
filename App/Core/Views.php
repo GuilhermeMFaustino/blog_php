@@ -66,6 +66,18 @@ class Views extends Controller
             })
         );
 
+         $this->twig->addFunction(
+            new TwigFunction('data', function () {
+                return Helpers::dataAtual();
+            })
+        );
+
+        $this->twig->addFunction(
+            new TwigFunction('formatData', function ($data) {
+                return Helpers::formatData($data);
+            })
+        );
+
        
     }
 }

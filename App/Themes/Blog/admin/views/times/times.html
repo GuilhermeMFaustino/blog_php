@@ -33,6 +33,7 @@
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Time</th>
+                      <th scope="col">Escudo</th>
                       <th scope="col">Status</th> 
                       <th scope="col">data de cadastro</th>
                       <th scope="col">Editar</th>
@@ -44,6 +45,8 @@
                     {% for time in times %}
                     <tr>
                       <th scope="row">{{time.id}}</th>
+                      <td><img src="{{ url( time.thumb ) }}" /></td> 
+                                           
                       <td>{{time.time}}</td>                      
                       <td>
                         {% if time.status == 1 %}

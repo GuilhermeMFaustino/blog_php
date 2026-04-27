@@ -6,7 +6,7 @@
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-header-left">
-      <h5>Cidades</h5>
+      <h5>Times</h5>
     </div>
   </div>
   <!-- MAIN CONTENT -->
@@ -25,8 +25,42 @@
                       <label>Time</label>
                       <span class="d-block mb-2"></span>
                     </h5>
+
+                    
                   </div>
                   <div class="row mb-4 align-items-center">
+
+                    <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8">
+                      <div class="mb-4 mb-md-0 d-flex gap-4 your-brand">
+                        <div class="wd-200 ht-200 position-relative overflow-hidden border border-gray-2 rounded">
+                          <img id="preview_image" src="{{ userEdite.avatar ? url('App/Themes/Blog/admin/assets/images/avatar/'~userEdite.avatar) : url('App/Themes/Blog/admin/assets/images/avatar/undefined.png')
+                          }}" class="upload-pic img-fluid rounded h-300 w-300" alt="">
+                        </div>
+                        <input type="file" name="imagem" id="files" onchange="preview(this);" accept="image/*">
+                        <script>
+                          function preview(input) {
+                            if (input.files && input.files[0]) {
+                              var reader = new FileReader();
+                              reader.onload = function (e) {
+                                $('#preview_image')
+                                  .attr('src', e.target.result)
+                                  .width(250)
+                                  .height(250);
+                              };
+                              reader.readAsDataURL(input.files[0]);
+                            }
+                          }
+                        </script>
+                        <div class="d-flex flex-column gap-1">
+                          <div class="fs-11 text-gray-500 mt-2"># Upload your prifile</div>
+                          <div class="fs-11 text-gray-500"># Avatar size 250x250</div>
+                          <div class="fs-11 text-gray-500"># Max upload size 8mb</div>
+                          <div class="fs-11 text-gray-500"># Allowed file types: png, jpg, jpeg</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                     <div class="col-lg-8">
                       <div class="input-group">                        
                         <div class="input-group-text"><i class="feather-award"></i></div>

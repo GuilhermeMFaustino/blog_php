@@ -16,44 +16,49 @@
                 <div class="card stretch stretch-full">
                     <div class="card-body">
                         <form
-                            action="{% if editJogo.id %}{{ url('/admin/jogos/update/' ~ editJogo.id) }}{% else %}{{ url('/admin/jogos/save') }}{% endif %}"
+                            action="{% if clubesEdit.id %}{{ url('/admin/clubes/update/' ~ clubesEdit.id) }}{% else %}{{ url('/admin/clubes/save') }}{% endif %}"
                             method="POST" enctype="multipart/form-data">
 
                             <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
                                 <div class="card-body personal-info">
 
                                     <div class="row">
-
                                         <div class="col-lg-6 mb-4">
-                                            <select class="form-control" name="cityUm">
-                                                <option value="">Selecione a cidades do Clube</option>
-                                                {% for city in cidades %}
-                                                <option value="{{ city.id }}">
-                                                    {{ city.name }}
+                                            <label for="exampleFormControlInput1" class="form-label">Nome do Clube</label>
+                                            <input type="text" name="name" id="fundacao" class="form-control"
+                                                value="{{ clubesEdit.name }}" placeholder="Nome do Clube">
+                                        </div>
+                                        <div class="col-lg-6 mb-4">
+                                             <label for="exampleFormControlInput1" class="form-label">Selecione a cidades do Clube</label>
+                                            <select class="form-control" name="city">
+                                                {% for citi in city %}
+                                                <option value="{{ citi.id }}">
+                                                    {{ citi.name }}
                                                 </option>
                                                 {% endfor %}
                                             </select>
                                         </div>
-                                        <div class="mb-3">
+                                        
+                                        <div class="col-lg-6 mb-4">
                                             <label for="exampleFormControlInput1" class="form-label">Data de Fundação do Clube</label>
-                                            <input type="text" name="title" id="fundacao" class="form-control"
-                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                            <input type="date" name="data_titulo" id="fundacao" class="form-control"
+                                                value="{{clubesEdit.data_titulo }}" placeholder="data de Fundacão.">
                                         </div>
 
-                                        <div class="mb-3">
+                                        <div class="col-lg-6 mb-4">
                                             <label for="exampleFormControlInput1" class="form-label">Cores do Clube</label>
-                                            <input type="text" name="title" id="cores" class="form-control"
-                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                            <input type="text" name="cores" id="cores" class="form-control"
+                                                value="{{clubesEdit.cores}}" placeholder="Cores do Clube">
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="col-lg-6 mb-4">
                                             <label for="exampleFormControlInput1" class="form-label">Titulos / Campeonatos</label>
                                             <input type="text" name="title" id="titulo" class="form-control"
-                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                                value="{{clubesEdit.title}}" placeholder="Quantidades Titulos do Clube">
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleFormControlInput1" class="form-label">Campo / Estadio</label>
-                                            <input type="text" name="title" id="estadio" class="form-control"
-                                                value="{{editarcategoria.title}}" placeholder="Titulo">
+                                            <input type="text" name="estadio" id="estadio" class="form-control"
+                                                value="{{clubesEdit.estadio}}" placeholder="Estadio">
                                         </div>
 
                                         <div class="mb-3">
@@ -75,7 +80,7 @@
                             </div>
 
                             <input type="submit" class="btn btn-primary"
-                                value="{% if editJogo.id %}Atualizar{% else %}Cadastrar{% endif %}">
+                                value="{% if clubesEdit.id %}Atualizar{% else %}Cadastrar{% endif %}">
                         </form>
                     </div>
                 </div>
