@@ -42,8 +42,8 @@ class AdminVideosController extends Controller
             Helpers::redirect("/admin/videos/cadastrar");
             return;
         }
-        $videosSearch = (new Videos())->find("video = '{$videos['video']}'"
-        );
+        $videosSearch = (new Videos())->find("video = '{$videos['video']}'");
+        
         if ($videosSearch) {
             $this->message->error('Video ja publicado')->flash();
             Helpers::redirect("/admin/videos/cadastrar");

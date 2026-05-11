@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Core\Controller;
 use App\Models\Cidades;
+use App\Models\Clubes;
 use App\Models\Jogos;
 use App\Models\Times;
 use App\Support\Helpers;
@@ -21,6 +22,7 @@ class AdminTimesController extends Controller
     {
         $times = (new Times())->find();
 
+      
 
         $cropper = new Cropper("App/Themes/Blog/admin/assets/images/time/cache");
 
@@ -46,7 +48,7 @@ class AdminTimesController extends Controller
         $userLogged = (new UserController())->userLogged();
         $dados = [
             "userLogged" => $userLogged,
-            "times" => $times,
+            "times" => $times
         ];
 
         echo $this->views->render("Times/Times.html", $dados);
@@ -57,9 +59,12 @@ class AdminTimesController extends Controller
     {
         $cidades = (new Cidades())->find();
 
+          $clube = (new Clubes())->find();
+
         $dados = [
 
-            "city" => $cidades
+            "city" => $cidades,
+            "clubes" => $clube
         ];
 
         echo $this->views->render("Times/formulario.html", $dados);
@@ -178,7 +183,13 @@ class AdminTimesController extends Controller
     public function deletar($id)
     {
         $serachDelete = (new Times())->findByid($id);
-        $searcheJogos = (new Jogos())->find("timeum = :id OR timedois = :id",  "*",   "id={$serachDelete->id}");
+       $searcheJogos = (new Jogos())->find("timeum = :id OR timedois = :id",  "*",   "id={$serachDelete->id}");
+        $searchClube = (new Clubes())->find( "id = {$serachDelete->id_club}");
+        if($searchClube){
+            $this->message->error("Não é possível excluir este time, pois existem Clubes vinculados a ele. Exclua primeiro o clube associados para prosseguir.")->flash();
+            Helpers::redirect("/admin/times/listar");
+            return;
+        }
         if($searcheJogos){
             $this->message->error("Não é possível excluir este time, pois existem jogos vinculados a ele. Exclua primeiro os jogos associados para prosseguir.")->flash();
             Helpers::redirect("/admin/times/listar");

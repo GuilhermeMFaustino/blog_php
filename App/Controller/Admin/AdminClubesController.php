@@ -20,11 +20,12 @@ class AdminClubesController extends Controller
     public function listar()
     {
         $userLogged = (new UserController())->userLogged();
-        
+
         $findCidades = (new Clubes())->findClubes();
 
-
-         foreach ($findCidades as $jogo) {
+        //var_dump($findCidades);
+        //die();
+        foreach ($findCidades as $jogo) {
             $cropper = new Cropper(
                 ROOT . "/App/Themes/Blog/admin/assets/images/time/cache"
             );
@@ -34,13 +35,12 @@ class AdminClubesController extends Controller
                 50,
                 50
             );
-           
+
             $jogo->thumb = str_replace(
                 ROOT,
                 URL_DESENVOLVIMENTO,
                 $jogo->thumb
             );
-
         }
 
         $dados = [
@@ -71,19 +71,20 @@ class AdminClubesController extends Controller
     public function save()
     {
         $dadosClubes = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        
+
         if (!array_filter($dadosClubes)) {
             $this->message->error("Favor preencher todos os Dados")->flash();
             Helpers::redirect('/admin/clubes/cadastrar');
             return;
         }
-        $clubeExistente = (new Clubes())->find("name = :name", "name={$dadosClubes['name']}");
+        $clubeExistente = (new Clubes())->find("name = :name", ['name' => $dadosClubes['name']]);
+
         if ($clubeExistente) {
             $this->message->error("Time já Cadastrado")->flash();
             Helpers::redirect('/admin/clubes/cadastrar');
             return;
         }
-        (new Clubes())->save($dadosClubes);       
+        (new Clubes())->save($dadosClubes);
         $this->message->success("Time Cadastrado com sucesso!")->flash();
         Helpers::redirect('/admin/clubes/listar');
         return;
@@ -102,7 +103,7 @@ class AdminClubesController extends Controller
         ];
 
         echo $this->views->render("clubes/formulario.html", $dados);
-    }    
+    }
 
 
     public function update($id)
@@ -115,11 +116,11 @@ class AdminClubesController extends Controller
             return;
         }
 
-       $clubeExistente = (new Clubes())->find("name = :name", "name={$iputedit['name']}");
-       
+        $clubeExistente = (new Clubes())->find("name = :name", ['name' => $iputedit['name']]);
+
         if ($clubeExistente) {
             $this->message->error("Time já Cadastrado")->flash();
-           Helpers::redirect("/admin/clubes/editar/{$id}");
+            Helpers::redirect("/admin/clubes/editar/{$id}");
             return;
         }
         if ($updateTimes) {
@@ -134,15 +135,20 @@ class AdminClubesController extends Controller
     public function delete($id)
     {
         $serachDelete = (new clubes())->findByid($id);
+        var_dump($serachDelete);
         if (!$serachDelete) {
-            $this->message->error("Não existe Times para deletar")->flash();
+            $this->message->error("Não existe Clubes para deletar ou ocorreu um erro!.")->flash();
             Helpers::redirect("/admin/clubes/delete/{$id}");
             return;
         }
 
         if ($serachDelete) {
+            var_dump($serachDelete);
+            //die();
             (new Clubes())->delete("id = $id");
-            $this->message->success("Time Deletado com sucesso")->flash();
+            //var_dump($teste);
+            //die();
+            $this->message->success("Clube Deletado com sucesso")->flash();
             Helpers::redirect("/admin/clubes/listar");
             return;
         }

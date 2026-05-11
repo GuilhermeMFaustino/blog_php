@@ -42,9 +42,13 @@ abstract class Models
      * @param mixed $columns
      * @return array
      */
-    public function find(?string $params = null, ?string $columns = "*", ?string $bind = null,)
-    {
+    public function find(
+        ?string $params = null,
+        ?array $bind = null,
+        ?string $columns = "*"
+    ) {
         $sql = "SELECT {$columns} FROM {$this->table}";
+
         if ($params) {
             $sql .= " WHERE {$params}";
         }
@@ -54,18 +58,12 @@ abstract class Models
         $sql .= $this->offset ?? '';
 
         $stmt = $this->conn->prepare($sql);
-        if ($bind) {
-            parse_str($bind, $params);
-            $stmt->execute($params);
-            } else {
-                $stmt->execute();
-                //var_dump($stmt);
-                //die();
-           
-        }
+        $stmt->execute($bind ?? []);
 
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+
 
     public function findOne(?string $params = null, ?string $bind = null, ?string $columns = "*")
     {
@@ -121,7 +119,12 @@ abstract class Models
             $colums = implode(', ', array_keys($dados));
             $values = ':' . implode(', :', array_keys($dados));
             $query = "INSERT INTO {$this->table} ({$colums}) VALUES ({$values})";
+
             $stmt = Connect::getInstance()->prepare($query);
+            //var_dump($query);
+            //var_dump($this->filter($dados));
+            //var_dump($stmt);
+            //die();
             $stmt->execute($this->filter($dados));
             return Connect::getInstance()->lastInsertId();
         } catch (PDOException $ex) {
@@ -157,6 +160,8 @@ abstract class Models
         try {
             $query = "DELETE FROM {$this->table} WHERE {$terms}";
             $stmt = Connect::getInstance()->prepare($query);
+            var_dump($stmt);
+            die();
             $stmt->execute();
             return true;
         } catch (PDOException $ex) {
